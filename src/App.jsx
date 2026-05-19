@@ -1,42 +1,12 @@
 import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { ArrowRight, CheckCircle2, ChevronLeft, Home, ShieldCheck, Truck, WalletCards, X } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronLeft, CreditCard, Home, PackageCheck, ShieldCheck, Truck, WalletCards, X } from "lucide-react";
 import "./styles.css";
 
 const PRODUCTS = [
-  {
-    id: "sommier-premium",
-    name: "Sommier Premium 2 plazas",
-    headline: "Renová tu descanso sin tarjeta.",
-    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=1200&auto=format&fit=crop",
-    monthly: "$2.990",
-    oldPrice: "$39.900",
-    badge: "LOTE LIMITADO",
-    units: 18,
-    category: "Hogar",
-  },
-  {
-    id: "notebook-lenovo",
-    name: "Notebook Lenovo",
-    headline: "Tu notebook en cuotas sin tarjeta.",
-    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1200&auto=format&fit=crop",
-    monthly: "$3.490",
-    oldPrice: "$46.900",
-    badge: "12 CUOTAS",
-    units: 12,
-    category: "Tecnología",
-  },
-  {
-    id: "smart-tv",
-    name: 'Smart TV 50"',
-    headline: "Estrená TV sin usar tarjeta.",
-    image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=1200&auto=format&fit=crop",
-    monthly: "$2.790",
-    oldPrice: "$36.900",
-    badge: "SIN TARJETA",
-    units: 9,
-    category: "Electro",
-  },
+  { id: "sommier-premium", name: "Sommier Premium 2 plazas", image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=1200&auto=format&fit=crop", monthly: "$2.990", badge: "LOTE LIMITADO", units: 18, category: "Hogar" },
+  { id: "notebook-lenovo", name: "Notebook Lenovo", image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1200&auto=format&fit=crop", monthly: "$3.490", badge: "12 CUOTAS", units: 12, category: "Tecnología" },
+  { id: "smart-tv", name: 'Smart TV 50"', image: "https://images.unsplash.com/photo-1593784991095-a205069470b6?q=80&w=1200&auto=format&fit=crop", monthly: "$2.790", badge: "SIN TARJETA", units: 9, category: "Electro" },
 ];
 
 const API_URL = import.meta.env.VITE_API_URL || "";
@@ -44,7 +14,6 @@ const API_URL = import.meta.env.VITE_API_URL || "";
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(PRODUCTS[0]);
   const [wizardOpen, setWizardOpen] = useState(false);
-
   const secondaryProducts = useMemo(() => PRODUCTS.filter((p) => p.id !== selectedProduct.id), [selectedProduct]);
 
   function openWizard(product) {
@@ -117,8 +86,24 @@ function App() {
         </div>
       </section>
 
-      <HowItWorks />
+      <ProcessWithCabal />
       <Benefits />
+
+      <section className="cabalValue">
+        <div>
+          <span className="tinyTag">BENEFICIO EXTRA</span>
+          <h2>Además, recibís tu tarjeta Cabal.</h2>
+          <p>Después de recibir tu compra, también te llega tu tarjeta Cabal para pagar las cuotas y acceder a beneficios y futuras posibilidades de compra.</p>
+          <small>*Condiciones, beneficios y disponibilidad sujetos a aprobación y términos del emisor.</small>
+        </div>
+
+        <div className="cabalCard">
+          <div className="cabalLogo">CABAL</div>
+          <div className="chip" />
+          <div className="cardLine" />
+          <div className="cardFooter">Beneficios + cuotas + futuras compras</div>
+        </div>
+      </section>
 
       <section className="finalCta">
         <h2>Comprá sin tarjeta, en cuotas y sin complicarte.</h2>
@@ -140,10 +125,7 @@ function Header() {
     <header className="header">
       <div className="brand">
         <div className="logoMark">%</div>
-        <div>
-          <strong>Zona Descuentos</strong>
-          <span>asociada a credizona</span>
-        </div>
+        <div><strong>Zona Descuentos</strong><span>asociada a credizona</span></div>
       </div>
       <div className="headerTrust">
         <span><ShieldCheck size={18} /> Datos protegidos</span>
@@ -153,17 +135,24 @@ function Header() {
   );
 }
 
-function HowItWorks() {
+function ProcessWithCabal() {
   return (
     <section className="steps">
       <div className="sectionHead">
-        <h2>Comprar es más fácil de lo que pensás.</h2>
-        <p>Sin tarjeta. Sin vueltas. Con validación simple.</p>
+        <h2>¿Cómo funciona?</h2>
+        <p>Comprás primero. La tarjeta llega después para pagar las cuotas.</p>
       </div>
-      <div className="stepsGrid">
+
+      <div className="stepsGrid four">
         <div><span>1</span><h3>Elegís producto</h3><p>Seleccionás el producto que querés comprar.</p></div>
         <div><span>2</span><h3>Verificás si calificás</h3><p>Completás unos datos básicos en el formulario.</p></div>
-        <div><span>3</span><h3>Recibís en tu casa</h3><p>Si se aprueba, se genera la orden de entrega.</p></div>
+        <div><span>3</span><h3>Recibís tu compra</h3><p>Si se aprueba, se genera la orden y coordinamos la entrega.</p></div>
+        <div className="cabalStep">
+          <span><CreditCard size={22} /></span>
+          <h3>Después recibís tu Cabal</h3>
+          <p>Con esa tarjeta pagás las cuotas y accedés a beneficios.</p>
+          <strong className="miniCabal">CABAL</strong>
+        </div>
       </div>
     </section>
   );
@@ -172,9 +161,9 @@ function HowItWorks() {
 function Benefits() {
   return (
     <section className="benefits">
-      <div><WalletCards /><strong>Hasta 12 cuotas</strong><span>Sin usar tarjeta.</span></div>
-      <div><CheckCircle2 /><strong>Sin recargo</strong><span>Oferta simple y clara.</span></div>
-      <div><Home /><strong>Entrega coordinada</strong><span>El proveedor recibe la orden.</span></div>
+      <div><WalletCards /><strong>Hasta 12 cuotas</strong><span>Sin usar tarjeta al momento de comprar.</span></div>
+      <div><PackageCheck /><strong>Recibís el producto</strong><span>Primero se coordina la entrega de tu compra.</span></div>
+      <div><CreditCard /><strong>Tarjeta Cabal</strong><span>Después te llega para pagar cuotas y usar beneficios.</span></div>
       <div><ShieldCheck /><strong>Garantía incluida</strong><span>Según producto seleccionado.</span></div>
     </section>
   );
@@ -213,7 +202,6 @@ function Wizard({ product, onClose, apiUrl }) {
 
   async function next() {
     if (!validateStep()) return;
-
     if (step < 4) {
       setStep(step + 1);
       trackEvent(`wizard_step_${step}_completed`, { product_id: product.id });
@@ -232,9 +220,10 @@ function Wizard({ product, onClose, apiUrl }) {
         monthly_price: product.monthly,
         status: "lead_received",
         source: "zona_descuentos_landing",
+        financing_note: "Cliente solicita compra financiada. Si califica, recibe el producto y luego tarjeta Cabal para pagar cuotas."
       },
       financial: { income: form.income, employment: form.employment, department: form.department },
-      meta: { created_at: new Date().toISOString() },
+      meta: { created_at: new Date().toISOString() }
     };
 
     try {
@@ -267,7 +256,7 @@ function Wizard({ product, onClose, apiUrl }) {
           <div className="result">
             <CheckCircle2 size={54} />
             <h2>Solicitud recibida.</h2>
-            <p>Estamos verificando tus datos. Si avanzás en el proceso, te vamos a contactar para continuar.</p>
+            <p>Estamos verificando tus datos. Si calificás, avanzamos con la compra, coordinamos la entrega y luego recibirás tu tarjeta Cabal para pagar las cuotas.</p>
             <button className="primaryBtn" onClick={onClose}>Cerrar</button>
           </div>
         ) : status === "error" ? (
@@ -318,7 +307,7 @@ function Wizard({ product, onClose, apiUrl }) {
                   <strong>{product.name}</strong>
                   <span>Hasta 12 cuotas sin recargo</span>
                   <span>Desde {product.monthly} / mes</span>
-                  <small>*Sujeto a aprobación crediticia. PTF informado al finalizar.</small>
+                  <small>Si calificás, recibís la compra y luego tu tarjeta Cabal para pagar las cuotas. *Sujeto a aprobación crediticia. PTF informado al finalizar.</small>
                 </div>
               </WizardStep>
             )}
@@ -346,7 +335,7 @@ function Footer() {
     <footer>
       <strong>Zona Descuentos</strong>
       <span>asociada a credizona</span>
-      <small>*Sujeto a aprobación crediticia. La disponibilidad, cuotas y condiciones pueden variar según producto y evaluación.</small>
+      <small>*Sujeto a aprobación crediticia. La disponibilidad, cuotas y condiciones pueden variar según producto y evaluación. La tarjeta Cabal se emite según aprobación y condiciones del emisor.</small>
     </footer>
   );
 }
