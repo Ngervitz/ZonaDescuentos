@@ -2,12 +2,10 @@ import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowRight,
-  Check,
   CheckCircle2,
   ChevronLeft,
   CreditCard,
   Menu,
-  PackageCheck,
   ShieldCheck,
   ShoppingCart,
   Truck,
@@ -87,8 +85,6 @@ function App() {
           <p className="eyebrow">{selectedProduct.category}</p>
           <h1>{selectedProduct.shortName}</h1>
           <p className="description">{selectedProduct.description}</p>
-
-          <PriceCard product={selectedProduct} />
         </div>
 
         <div className="heroImage">
@@ -96,9 +92,12 @@ function App() {
         </div>
 
         <div className="heroAction">
+          <PriceCard product={selectedProduct} />
+
           <button className="mainBtn" onClick={() => openWizard(selectedProduct)}>
             Ver si califico <ArrowRight size={22} />
           </button>
+
           <p>*Sujeto a aprobación crediticia. PTF informado al finalizar la solicitud.</p>
         </div>
       </section>
@@ -114,7 +113,6 @@ function App() {
       />
 
       <Process />
-
       <CabalBox />
 
       <section className="finalCta">
@@ -202,26 +200,10 @@ function ProductSelector({ products, onSelect, onWizard }) {
 
 function Process() {
   const steps = [
-    {
-      icon: <ShoppingCart />,
-      title: "Elegís tu producto",
-      text: "Seleccionás el producto que querés comprar.",
-    },
-    {
-      icon: <UserCheck />,
-      title: "Verificamos si calificás",
-      text: "Completás tus datos y vemos si podés avanzar.",
-    },
-    {
-      icon: <Truck />,
-      title: "Recibís tu compra",
-      text: "Si se aprueba, coordinamos la entrega.",
-    },
-    {
-      icon: <CreditCard />,
-      title: "Recibís tu tarjeta Cabal",
-      text: "Después te llega para pagar cuotas y acceder a beneficios.",
-    },
+    { icon: <ShoppingCart />, title: "Elegís tu producto", text: "Seleccionás el producto que querés comprar." },
+    { icon: <UserCheck />, title: "Verificamos si calificás", text: "Completás tus datos y vemos si podés avanzar." },
+    { icon: <Truck />, title: "Recibís tu compra", text: "Si se aprueba, coordinamos la entrega." },
+    { icon: <CreditCard />, title: "Recibís tu tarjeta Cabal", text: "Después te llega para pagar cuotas y acceder a beneficios." },
   ];
 
   return (

@@ -39,8 +39,6 @@ main {
   overflow: hidden;
 }
 
-/* Header */
-
 .topbar {
   min-height: 112px;
   padding: 22px 34px;
@@ -98,13 +96,9 @@ main {
 
 .associated strong {
   display: block;
+  color: var(--green);
   font-size: 30px;
   letter-spacing: -0.04em;
-}
-
-.associated strong::first-letter,
-.associated strong {
-  color: var(--green);
 }
 
 .menuBtn {
@@ -113,8 +107,6 @@ main {
   border: 0;
   color: var(--navy);
 }
-
-/* Hero */
 
 .hero {
   max-width: 1180px;
@@ -125,7 +117,7 @@ main {
   grid-template-areas:
     "copy image"
     "action action";
-  gap: 12px 22px;
+  gap: 18px 22px;
   position: relative;
 }
 
@@ -215,30 +207,35 @@ main {
   box-shadow: -18px 24px 60px rgba(11, 42, 91, 0.14);
 }
 
+.heroAction {
+  grid-area: action;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  align-items: center;
+  z-index: 7;
+  margin-top: 6px;
+}
+
 .priceCard {
-  position: absolute;
-  left: 34px;
-  bottom: 38px;
-  width: 295px;
-  min-height: 245px;
+  width: 100%;
   background: white;
   border-radius: 34px;
-  padding: 31px 28px;
+  padding: 28px 24px;
   box-shadow: 0 28px 70px rgba(11, 42, 91, 0.14);
-  z-index: 5;
 }
 
 .priceCard span {
   display: block;
   color: #111;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 900;
 }
 
 .priceCard strong {
   display: block;
   color: var(--green);
-  font-size: 62px;
+  font-size: 54px;
   line-height: 1;
   letter-spacing: -0.07em;
   margin-top: 7px;
@@ -247,25 +244,24 @@ main {
 .priceCard small {
   display: block;
   color: #111;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 900;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .priceCard div {
-  margin-top: 28px;
+  margin-top: 20px;
   background: var(--soft-green);
   color: var(--green);
   border-radius: 20px;
-  padding: 16px 18px;
-  font-size: 20px;
+  padding: 14px 16px;
+  font-size: 19px;
   line-height: 1.2;
 }
 
-.heroAction {
-  grid-area: action;
-  z-index: 7;
-  padding-top: 20px;
+.heroAction > div:last-child {
+  display: grid;
+  gap: 14px;
 }
 
 .mainBtn {
@@ -292,10 +288,9 @@ main {
   text-align: center;
   color: var(--muted);
   font-size: 16px;
-  margin: 18px 0 0;
+  margin: 0;
+  grid-column: 2;
 }
-
-/* Products */
 
 .products,
 .process,
@@ -415,8 +410,6 @@ footer {
   background: var(--green);
 }
 
-/* Process */
-
 .process {
   padding-top: 60px;
   padding-bottom: 46px;
@@ -490,8 +483,6 @@ footer {
   margin: 0;
 }
 
-/* Cabal */
-
 .cabalBox {
   margin-top: 18px;
   margin-bottom: 42px;
@@ -528,8 +519,6 @@ footer {
   line-height: 1.35;
 }
 
-/* Final CTA */
-
 .finalCta {
   background: var(--navy);
   color: white;
@@ -552,8 +541,6 @@ footer {
   font-size: 20px;
   margin: 0 0 24px;
 }
-
-/* Footer */
 
 footer {
   display: grid;
@@ -762,12 +749,18 @@ footer strong {
   }
 
   .hero {
-    padding: 38px 22px 24px;
-    display: block;
+    padding: 38px 22px 26px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "image"
+      "action";
+    gap: 18px;
   }
 
   .badges {
-    margin-bottom: 56px;
+    margin-bottom: 46px;
   }
 
   .badge {
@@ -789,39 +782,56 @@ footer strong {
   }
 
   .heroImage {
-    min-height: 445px;
-    margin-top: -44px;
+    min-height: 380px;
+    margin-top: -30px;
+    border-radius: 34px;
+    overflow: hidden;
+    background: white;
   }
 
   .heroImage img {
-    right: -210px;
-    bottom: 0;
-    width: 165%;
-    height: 88%;
-    border-radius: 0 0 0 44px;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 34px;
+    box-shadow: none;
   }
 
-  .priceCard {
-    left: 0;
-    bottom: 0;
-    width: 276px;
-    min-height: 234px;
-    border-radius: 32px;
-    padding: 28px 24px;
-  }
-
-  .priceCard strong {
-    font-size: 58px;
+  .heroImage::before {
+    display: none;
   }
 
   .heroAction {
-    padding-top: 24px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 0;
+  }
+
+  .priceCard {
+    width: 100%;
+    border-radius: 28px;
+    padding: 24px 24px;
+  }
+
+  .priceCard strong {
+    font-size: 56px;
+  }
+
+  .priceCard div {
+    font-size: 19px;
   }
 
   .mainBtn {
     font-size: 22px;
     padding: 21px 24px;
     border-radius: 21px;
+  }
+
+  .heroAction p {
+    grid-column: auto;
+    font-size: 15px;
   }
 
   .products,
@@ -886,12 +896,7 @@ footer strong {
     font-size: 56px;
   }
 
-  .heroImage img {
-    right: -230px;
-    width: 178%;
-  }
-
-  .priceCard {
-    width: 260px;
+  .heroImage {
+    min-height: 350px;
   }
 }
