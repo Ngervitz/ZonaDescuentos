@@ -13,16 +13,23 @@ export default function RelatedProducts({ products, onOpenWizard }) {
       <div className="relatedProductsGrid">
         {products.map((product) => (
           <article className="relatedCardLarge" key={product.slug}>
-            <div className="relatedCardLargeMedia">
+            <Link
+              to={`/producto/${product.slug}`}
+              className="relatedCardLargeMedia relatedCardLargeMediaLink"
+            >
               <ProductImage
                 src={product.mainImage}
                 product={product}
                 alt={product.name}
                 className="relatedCardLargeImage"
               />
-            </div>
+            </Link>
             <div className="relatedCardLargeBody">
-              <h3>{product.name}</h3>
+              <h3>
+                <Link to={`/producto/${product.slug}`} className="relatedCardLargeTitleLink">
+                  {product.name}
+                </Link>
+              </h3>
               {product.priceMonthly > 0 && (
                 <div className="relatedCardLargePrice">
                   <span className="relatedCardLargePriceLabel">

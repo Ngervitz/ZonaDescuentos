@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { resolveGallerySources } from "../../utils/productImage";
 import ProductImage from "../ui/ProductImage";
 
@@ -8,7 +9,7 @@ function resolveStockBadge(product) {
   return "Lote limitado";
 }
 
-export default function ProductGallery({ product }) {
+export default function ProductGallery({ product, linkToProduct = false }) {
   const images = useMemo(() => resolveGallerySources(product), [product]);
   const stockBadge = resolveStockBadge(product);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -19,21 +20,35 @@ export default function ProductGallery({ product }) {
 
   const activeImage = images[activeIndex] ?? images[0];
 
+  const mainImage = (
+    <div className="productGalleryMain">
+      {stockBadge && (
+        <span className="productGalleryFeatured">{stockBadge}</span>
+      )}
+      <ProductImage
+        src={activeImage?.src}
+        product={product}
+        galleryIndex={activeImage?.index ?? activeIndex}
+        alt={product.name || "Producto"}
+        className="productGalleryMainImage"
+        eager
+      />
+    </div>
+  );
+
   return (
     <div className="productGallery">
-      <div className="productGalleryMain">
-        {stockBadge && (
-          <span className="productGalleryFeatured">{stockBadge}</span>
-        )}
-        <ProductImage
-          src={activeImage?.src}
-          product={product}
-          galleryIndex={activeImage?.index ?? activeIndex}
-          alt={product.name || "Producto"}
-          className="productGalleryMainImage"
-          eager
-        />
-      </div>
+      {linkToProduct ? (
+        <Link
+          to={`/producto/${product.slug}`}
+          className="productGalleryMainLink"
+          aria-label={`Ver ${product.name}`}
+        >
+          {mainImage}
+        </Link>
+      ) : (
+        mainImage
+      )}
       {images.length > 1 && (
         <div className="productGalleryThumbs" role="tablist" aria-label="Miniaturas">
           {images.map((image, index) => (

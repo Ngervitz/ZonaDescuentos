@@ -249,10 +249,12 @@ img {
   }
 }
 
+.landingHome .productPagePromoBar,
 .landingProduct .productPagePromoBar {
   grid-template-columns: repeat(2, 1fr);
 }
 
+.landingHome .productPagePromoItem,
 .landingProduct .productPagePromoItem {
   padding: 12px 14px;
   font-size: 0.75rem;
@@ -260,6 +262,7 @@ img {
   text-align: center;
 }
 
+.landingHome .productPagePromoEmoji,
 .landingProduct .productPagePromoEmoji {
   font-size: 1rem;
   line-height: 1;
@@ -267,10 +270,12 @@ img {
 }
 
 @media (min-width: 768px) {
+  .landingHome .productPagePromoBar,
   .landingProduct .productPagePromoBar {
     grid-template-columns: repeat(4, 1fr);
   }
 
+  .landingHome .productPagePromoItem,
   .landingProduct .productPagePromoItem {
     font-size: 0.8125rem;
     padding: 14px 12px;
@@ -278,10 +283,103 @@ img {
 }
 
 @media (max-width: 767px) {
+  .landingHome .productPagePromoBar,
   .landingProduct .productPagePromoBar {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+  }
+}
+
+/* Home — conversion layout aligned with product landing */
+.landingHome {
+  padding-bottom: 0;
+}
+
+.landingHome .productHero {
+  padding-top: 10px;
+}
+
+.landingHome .homeOtherProducts {
+  padding-top: 8px;
+}
+
+.homeWhyBlock {
+  max-width: 1180px;
+  margin: 0 auto 28px;
+  padding: 0 20px;
+}
+
+.homeWhyBlock h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.375rem, 3.5vw, 1.75rem);
+  font-weight: 900;
+  color: var(--navy);
+  text-align: center;
+}
+
+.homeWhyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.homeWhyCard {
+  padding: 20px 18px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #ffffff 0%, var(--soft-navy) 100%);
+  border: 1px solid rgba(75, 44, 145, 0.14);
+  box-shadow: 0 6px 20px rgba(75, 44, 145, 0.1);
+}
+
+.homeWhyCardIcon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: var(--navy);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.homeWhyCard h3 {
+  margin: 0 0 6px;
+  font-size: 1.0625rem;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.homeWhyCard p {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.homeFinalCta .productFinalTrust {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .homeWhyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .homeWhyGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .landingHome .productGalleryMain {
+    min-height: 50vh;
+    aspect-ratio: auto;
   }
 }
 
@@ -1161,6 +1259,22 @@ img {
   min-width: 0;
 }
 
+.productGalleryMainLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.productHeroTitleLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.productHeroTitleLink:hover .productHeroTitle {
+  color: var(--navy);
+}
+
 .productHeroAside {
   display: flex;
   flex-direction: column;
@@ -1999,6 +2113,21 @@ img {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 6px 28px rgba(7, 27, 53, 0.1);
+}
+
+.relatedCardLargeMediaLink {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.relatedCardLargeTitleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.relatedCardLargeTitleLink:hover {
+  color: var(--navy);
 }
 
 .relatedCardLargeMedia {
