@@ -20,10 +20,14 @@ export default function RelatedProducts({ products, onOpenWizard }) {
             </div>
             <div className="relatedCardBody">
               <h3>{product.name}</h3>
-              <p className="relatedCardSubtitle">{product.subtitle}</p>
-              <p className="relatedCardPrice">
-                Desde <strong>{formatProductPrice(product.priceMonthly)}</strong> / mes
-              </p>
+              {product.subtitle && (
+                <p className="relatedCardSubtitle">{product.subtitle}</p>
+              )}
+              {product.priceMonthly > 0 && (
+                <p className="relatedCardPrice">
+                  Desde <strong>{formatProductPrice(product.priceMonthly)}</strong> / mes
+                </p>
+              )}
               <div className="relatedCardCtas">
                 <Link className="relatedCardLink" to={`/producto/${product.slug}`}>
                   Ver detalles

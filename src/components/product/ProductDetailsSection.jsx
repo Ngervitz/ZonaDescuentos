@@ -1,6 +1,7 @@
 export default function ProductDetailsSection({ product }) {
   const hasFeatures = product.features?.length > 0;
-  const hasSpecs = product.specs?.length > 0;
+  const validSpecs = (product.specs ?? []).filter((spec) => spec?.label && spec?.value);
+  const hasSpecs = validSpecs.length > 0;
   const hasRecommended = product.recommendedFor?.length > 0;
   const hasConditions = product.conditions?.length > 0;
 
@@ -32,8 +33,8 @@ export default function ProductDetailsSection({ product }) {
           <article className="detailCard">
             <h3>Especificaciones</h3>
             <dl className="specsList">
-              {product.specs.map((spec) => (
-                <div className="specsRow" key={spec.label}>
+              {validSpecs.map((spec) => (
+                <div className="specsRow" key={`${spec.label}-${spec.value}`}>
                   <dt>{spec.label}</dt>
                   <dd>{spec.value}</dd>
                 </div>

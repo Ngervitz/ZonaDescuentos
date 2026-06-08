@@ -14,6 +14,8 @@ function badgeVariant(label) {
 }
 
 export default function ProductHero({ product, onOpenWizard }) {
+  const badges = product.badges ?? [];
+
   return (
     <section className="productHero">
       <nav className="productBreadcrumb" aria-label="Breadcrumb">
@@ -28,20 +30,24 @@ export default function ProductHero({ product, onOpenWizard }) {
         <ProductGallery product={product} />
 
         <div className="productHeroInfo">
-          <div className="productCardBadges">
-            {product.badges.map((label) => (
-              <span
-                className={`productBadge productBadge--${badgeVariant(label)}`}
-                key={label}
-              >
-                {label}
-              </span>
-            ))}
-          </div>
+          {badges.length > 0 && (
+            <div className="productCardBadges">
+              {badges.map((label) => (
+                <span
+                  className={`productBadge productBadge--${badgeVariant(label)}`}
+                  key={label}
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          )}
 
           <h1>{product.name}</h1>
-          <p className="productHeroSubtitle">{product.subtitle}</p>
-          <p className="productHeroDescription">{product.shortDescription}</p>
+          {product.subtitle && <p className="productHeroSubtitle">{product.subtitle}</p>}
+          {product.shortDescription && (
+            <p className="productHeroDescription">{product.shortDescription}</p>
+          )}
 
           {product.extras?.length > 0 && (
             <ul className="productExtras">

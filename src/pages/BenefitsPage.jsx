@@ -32,6 +32,8 @@ import {
 } from "lucide-react";
 import { BENEFITS_DISCLAIMER, getBenefitsGrouped } from "../data/benefits";
 import { SiteFooter, SiteHeader } from "../components/layout/LandingChrome";
+import usePageSeo from "../hooks/usePageSeo";
+import { BENEFITS_SEO } from "../utils/seo";
 
 const ICON_MAP = {
   ShoppingBag,
@@ -87,6 +89,8 @@ function BenefitCard({ benefit }) {
 
 export default function BenefitsPage() {
   const grouped = getBenefitsGrouped();
+
+  usePageSeo(BENEFITS_SEO);
 
   return (
     <main className="landing benefitsPage">

@@ -18,6 +18,7 @@ function badgeVariant(label) {
 
 export default function ProductCard({ product, onOpenWizard }) {
   const canApply = product.isOperable;
+  const badges = product.badges ?? [];
 
   return (
     <article className="productCard" id={`producto-${product.slug}`}>
@@ -26,30 +27,36 @@ export default function ProductCard({ product, onOpenWizard }) {
         <Link to={`/producto/${product.slug}`} className="productCardMediaLink">
           <ProductImage
             src={product.mainImage}
-            alt={product.name}
+            alt={product.name || "Producto"}
             className="productCardImage"
           />
         </Link>
       </div>
 
       <div className="productCardBody">
-        <div className="productCardBadges">
-          {product.badges.map((label) => (
-            <span
-              className={`productBadge productBadge--${badgeVariant(label)}`}
-              key={label}
-            >
-              {label}
-            </span>
-          ))}
-        </div>
+        {badges.length > 0 && (
+          <div className="productCardBadges">
+            {badges.map((label) => (
+              <span
+                className={`productBadge productBadge--${badgeVariant(label)}`}
+                key={label}
+              >
+                {label}
+              </span>
+            ))}
+          </div>
+        )}
         <h2>
           <Link to={`/producto/${product.slug}`} className="productCardTitleLink">
             {product.name}
           </Link>
-          <span className="productCardSubtitle">{product.subtitle}</span>
+          {product.subtitle && (
+            <span className="productCardSubtitle">{product.subtitle}</span>
+          )}
         </h2>
-        <p className="productCardDesc">{product.shortDescription}</p>
+        {product.shortDescription && (
+          <p className="productCardDesc">{product.shortDescription}</p>
+        )}
       </div>
 
       <div className="productCardOffer">
@@ -59,9 +66,11 @@ export default function ProductCard({ product, onOpenWizard }) {
             {formatProductPrice(product.priceMonthly)}
           </strong>
           <span className="productPriceUnit">por cuota</span>
-          <p className="productPricePtf">
-            PTF total: <span>{formatProductPrice(product.totalPrice)}</span>
-          </p>
+          {product.totalPrice > 0 && (
+            <p className="productPricePtf">
+              PTF total: <span>{formatProductPrice(product.totalPrice)}</span>
+            </p>
+          )}
         </div>
 
         {product.insuranceIncluded && <InsuranceBadge compact />}

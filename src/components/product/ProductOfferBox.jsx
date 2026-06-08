@@ -17,9 +17,11 @@ export default function ProductOfferBox({
         <span className="productPriceLabel">{product.installments} cuotas desde</span>
         <strong className="productPriceMain">{formatProductPrice(product.priceMonthly)}</strong>
         <span className="productPriceUnit">por cuota</span>
-        <p className="productPricePtf">
-          PTF total: <span>{formatProductPrice(product.totalPrice)}</span>
-        </p>
+        {product.totalPrice > 0 && (
+          <p className="productPricePtf">
+            PTF total: <span>{formatProductPrice(product.totalPrice)}</span>
+          </p>
+        )}
       </div>
 
       {product.insuranceIncluded && <InsuranceBadge compact={compact} />}

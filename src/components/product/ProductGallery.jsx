@@ -1,13 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProductImage from "../ui/ProductImage";
 
+function resolveGalleryImages(product) {
+  const fromGallery = product.gallery?.filter(Boolean) ?? [];
+  if (fromGallery.length > 0) return fromGallery;
+  if (product.mainImage) return [product.mainImage];
+  return [];
+}
+
 export default function ProductGallery({ product }) {
-  const images = product.gallery?.length ? product.gallery : [product.mainImage];
+  const images = useMemo(() => resolveGalleryImages(product), [product]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     setActiveIndex(0);
   }, [product.slug]);
+
+  if (images.length === 0) {
+    return (
+      <div className="productGallery">
+        <div className="productGalleryMain">
+          <ProductImage src={null} alt={product.name || "Producto"} eager />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="productGallery">
@@ -28,6 +45,7 @@ export default function ProductGallery({ product }) {
               type="button"
               role="tab"
               aria-selected={index === activeIndex}
+              aria-label={`Imagen ${index + 1}`}
               className={`productGalleryThumb${index === activeIndex ? " isActive" : ""}`}
               onClick={() => setActiveIndex(index)}
             >

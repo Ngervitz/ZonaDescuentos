@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Wizard from "../components/wizard/Wizard";
 import { SiteFooter, SiteHeader } from "../components/layout/LandingChrome";
 import PromoBar from "../components/sections/PromoBar";
@@ -8,25 +8,26 @@ import HowItWorksSection from "../components/sections/HowItWorksSection";
 import ProductsSection from "../components/sections/ProductsSection";
 import NotQualifiedBlock from "../components/sections/NotQualifiedBlock";
 import FinalCtaSection from "../components/sections/FinalCtaSection";
-import { getActiveProducts, getMainProduct } from "../data/products";
+import usePageSeo from "../hooks/usePageSeo";
+import { useWizardLauncher } from "../hooks/useWizardLauncher";
+import { ENTRY_PATH } from "../utils/applicationFlow";
+import { SITE_SEO } from "../utils/seo";
+import {
+  getFeaturedProduct,
+  listVisibleProducts,
+} from "../services/productCatalog";
 import { track } from "../services/tracking";
 
 export default function HomePage() {
-  const products = getActiveProducts();
-  const mainProduct = getMainProduct();
-  const [wizardProduct, setWizardProduct] = useState(null);
+  const products = listVisibleProducts();
+  const mainProduct = getFeaturedProduct();
+  const { wizardProduct, openWizard, closeWizard } = useWizardLauncher();
+
+  usePageSeo(SITE_SEO);
 
   useEffect(() => {
     track("home_view", {});
   }, []);
-
-  function openWizard(product) {
-    setWizardProduct(product);
-    track("cta_click", {
-      product_id: product.id,
-      product_slug: product.slug,
-    });
-  }
 
   return (
     <main className="landing">
@@ -35,16 +36,19 @@ export default function HomePage() {
       <TrustBlock />
       <WhyZonaSection />
       <HowItWorksSection />
-      <ProductsSection products={products} onOpenWizard={openWizard} />
+      <ProductsSection
+        products={products}
+        onOpenWizard={(product) => openWizard(product, ENTRY_PATH.HOME_PRODUCT_CARD)}
+      />
       <NotQualifiedBlock />
       <FinalCtaSection
-        onOpenWizard={() => mainProduct && openWizard(mainProduct)}
+        onOpenWizard={() =>
+          mainProduct && openWizard(mainProduct, ENTRY_PATH.HOME_FINAL_CTA)
+        }
       />
       <SiteFooter />
 
-      {wizardProduct && (
-        <Wizard product={wizardProduct} onClose={() => setWizardProduct(null)} />
-      )}
+      {wizardProduct && <Wizard product={wizardProduct} onClose={closeWizard} />}
     </main>
   );
 }
