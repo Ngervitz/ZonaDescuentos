@@ -1,47 +1,55 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import { formatProductPrice } from "../../data/products";
+import { buildProductContext, ENTRY_PATH } from "../../utils/applicationFlow";
 import ProductImage from "../ui/ProductImage";
+import YellowButton from "../ui/YellowButton";
+
 export default function RelatedProducts({ products, onOpenWizard }) {
   if (!products.length) return null;
 
   return (
-    <section className="relatedProducts">
-      <h2>Productos relacionados</h2>
+    <section className="relatedProducts relatedProductsConversion">
+      <h2>También te puede interesar</h2>
       <div className="relatedProductsGrid">
         {products.map((product) => (
-          <article className="relatedCard" key={product.slug}>
-            <div className="relatedCardMedia">
+          <article className="relatedCardLarge" key={product.slug}>
+            <div className="relatedCardLargeMedia">
               <ProductImage
                 src={product.mainImage}
+                product={product}
                 alt={product.name}
-                className="relatedCardImage"
+                className="relatedCardLargeImage"
               />
             </div>
-            <div className="relatedCardBody">
+            <div className="relatedCardLargeBody">
               <h3>{product.name}</h3>
-              {product.subtitle && (
-                <p className="relatedCardSubtitle">{product.subtitle}</p>
-              )}
               {product.priceMonthly > 0 && (
-                <p className="relatedCardPrice">
-                  Desde <strong>{formatProductPrice(product.priceMonthly)}</strong> / mes
-                </p>
+                <div className="relatedCardLargePrice">
+                  <span className="relatedCardLargePriceLabel">
+                    {product.installments} cuotas desde
+                  </span>
+                  <strong className="relatedCardLargePriceAmount">
+                    {formatProductPrice(product.priceMonthly)}
+                  </strong>
+                </div>
               )}
-              <div className="relatedCardCtas">
-                <Link className="relatedCardLink" to={`/producto/${product.slug}`}>
-                  Ver detalles
-                  <ArrowRight size={16} strokeWidth={2.5} />
-                </Link>
+              <div className="relatedCardLargeCtas">
                 {product.isOperable && (
-                  <button
-                    type="button"
-                    className="relatedCardWizardBtn"
-                    onClick={() => onOpenWizard(product)}
+                  <YellowButton
+                    onClick={() =>
+                      onOpenWizard(
+                        product,
+                        buildProductContext(product, ENTRY_PATH.PRODUCT_LANDING)
+                      )
+                    }
+                    fullWidth
                   >
                     Ver si califico
-                  </button>
+                  </YellowButton>
                 )}
+                <Link to={`/producto/${product.slug}`} className="relatedCardLargeLink">
+                  Ver detalles
+                </Link>
               </div>
             </div>
           </article>

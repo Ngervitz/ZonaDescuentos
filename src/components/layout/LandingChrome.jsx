@@ -24,19 +24,6 @@ export function BrandLogo() {
             <span className="brandTagHole" />
             <span className="brandTagPct">%</span>
           </div>
-          <svg
-            className="brandTagCord"
-            viewBox="0 0 14 6"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0 3 C4 3, 8 2, 14 3"
-              stroke="#DC2626"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
         </div>
         <div className="brandLogoText">
           <p className="brandLogoTitle">

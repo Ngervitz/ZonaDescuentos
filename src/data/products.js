@@ -12,7 +12,7 @@ export const products = [
     id: "sommier-colchon-2-plazas",
     slug: "sommier-colchon-2-plazas",
     status: "active",
-    name: "Sommier + Colchón",
+    name: "Sommier 2 plazas +",
     subtitle: "2 plazas",
     category: "Dormitorio",
     shortDescription:

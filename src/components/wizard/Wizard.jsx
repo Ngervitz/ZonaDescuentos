@@ -32,7 +32,8 @@ const INITIAL_FORM = {
   department: "",
 };
 
-export default function Wizard({ product, onClose }) {
+export default function Wizard({ product, productContext, onClose }) {
+  const [applicationContext] = useState(() => productContext ?? null);
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState("idle");
   const [form, setForm] = useState(INITIAL_FORM);
@@ -104,6 +105,7 @@ export default function Wizard({ product, onClose }) {
       product,
       form,
       clientStatus: clientStatus ?? "new",
+      productContext: applicationContext,
     });
 
     try {

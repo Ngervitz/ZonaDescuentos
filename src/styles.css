@@ -87,7 +87,7 @@ img {
 .brandLogo {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 7px;
   min-width: 0;
 }
 
@@ -95,14 +95,12 @@ img {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  margin-right: 4px;
-  margin-top: -6px;
 }
 
 .brandTag {
   position: relative;
-  width: 26px;
-  height: 30px;
+  width: 30px;
+  height: 34px;
   background: linear-gradient(155deg, #f87171 0%, #ef4444 45%, #dc2626 100%);
   border: 1.5px solid #b91c1c;
   border-radius: 4px 4px 2px 2px;
@@ -127,21 +125,13 @@ img {
 }
 
 .brandTagPct {
-  margin-top: 6px;
+  margin-top: 7px;
   font-family: var(--font-title);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--white);
   line-height: 1;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
-}
-
-.brandTagCord {
-  width: 12px;
-  height: 6px;
-  flex-shrink: 0;
-  margin-left: -1px;
-  margin-right: 2px;
 }
 
 .brandLogoText {
@@ -259,6 +249,42 @@ img {
   }
 }
 
+.landingProduct .productPagePromoBar {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.landingProduct .productPagePromoItem {
+  padding: 12px 14px;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.landingProduct .productPagePromoEmoji {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .landingProduct .productPagePromoBar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .landingProduct .productPagePromoItem {
+    font-size: 0.8125rem;
+    padding: 14px 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .landingProduct .productPagePromoBar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+}
+
 /* How it works */
 .flowBlock {
   max-width: 1100px;
@@ -301,15 +327,16 @@ img {
   position: relative;
   display: flex;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .flowStepNumber {
   position: absolute;
-  top: -4px;
-  right: calc(50% - 34px);
-  width: 20px;
-  height: 20px;
+  top: -2px;
+  right: calc(50% - 42px);
+  z-index: 1;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: #fff;
   color: var(--navy);
@@ -318,30 +345,78 @@ img {
   font-weight: 800;
   display: grid;
   place-items: center;
+  box-shadow: 0 2px 6px rgba(26, 26, 26, 0.12);
 }
 
 .flowStepIcon {
-  width: 56px;
-  height: 56px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   background: var(--navy);
   color: #fff;
   display: grid;
   place-items: center;
+  box-shadow: 0 6px 18px rgba(75, 44, 145, 0.28);
+}
+
+.flowStep--1 .flowStepIcon {
+  background: var(--navy);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(75, 44, 145, 0.3);
+}
+
+.flowStep--1 .flowStepNumber {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+.flowStep--2 .flowStepIcon {
+  background: var(--yellow);
+  color: var(--text);
+  box-shadow: 0 6px 18px rgba(255, 193, 7, 0.38);
+}
+
+.flowStep--2 .flowStepNumber {
+  border-color: var(--yellow-dark);
+  color: #7a5a00;
+}
+
+.flowStep--3 .flowStepIcon {
+  background: var(--brand-green);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.3);
+}
+
+.flowStep--3 .flowStepNumber {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+}
+
+.flowStep--4 .flowStepIcon {
+  background: var(--cabal);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 159, 227, 0.32);
+}
+
+.flowStep--4 .flowStepNumber {
+  border-color: var(--cabal);
+  color: var(--cabal);
 }
 
 .flowStep h3 {
   margin: 0 0 6px;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 800;
-  color: var(--text);
+  color: var(--navy);
+  line-height: 1.25;
 }
 
 .flowStep p {
   margin: 0;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 1.45;
-  color: var(--text-muted);
+  font-weight: 600;
+  color: var(--text);
 }
 
 .flowStepLink {
@@ -361,9 +436,18 @@ img {
 }
 
 .flowArrow {
-  color: var(--text-soft);
-  opacity: 0.85;
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  opacity: 1;
+  padding: 4px 0;
+}
+
+.flowArrowIcon {
+  color: var(--navy);
+  filter: drop-shadow(0 1px 2px rgba(75, 44, 145, 0.2));
+  transform: rotate(90deg);
 }
 
 @media (min-width: 768px) {
@@ -388,11 +472,15 @@ img {
   }
 
   .flowArrow {
-    display: flex;
-    align-items: center;
     align-self: center;
     flex-shrink: 0;
-    padding: 0 6px;
+    padding: 0 4px;
+  }
+
+  .flowArrowIcon {
+    transform: none;
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -626,14 +714,14 @@ img {
   width: 100%;
   height: 100%;
   min-height: 180px;
-  display: grid;
-  place-items: center;
-  padding: 20px;
+  display: block;
   background: var(--price-bg);
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-align: center;
+}
+
+.productGalleryMain .productImageFallback,
+.productGalleryThumb .productImageFallback {
+  min-height: 0;
+  height: 100%;
 }
 
 .productCardFeatured {
@@ -1027,15 +1115,19 @@ img {
   width: 100%;
 }
 
-/* Product page */
+/* Product page — conversion landing */
 .landingProduct {
-  padding-bottom: 24px;
+  padding-bottom: 0;
 }
 
 .productHero {
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 20px 20px 8px;
+  padding: 10px 20px 4px;
+}
+
+.productHeroConversion {
+  padding-bottom: 0;
 }
 
 .productBreadcrumb {
@@ -1061,22 +1153,75 @@ img {
 .productHeroGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 20px;
+  align-items: start;
 }
 
-.productHeroInfo h1 {
-  margin: 0 0 6px;
-  font-size: clamp(1.5rem, 4vw, 2rem);
+.productHeroMedia {
+  min-width: 0;
+}
+
+.productHeroAside {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.productHeroBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.productHeroBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--soft-navy);
+  color: var(--navy);
+  font-size: 0.75rem;
   font-weight: 800;
-  color: var(--text);
-  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.productHeroTitle {
+  margin: 0 0 8px;
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.productHeroHeading {
+  margin-bottom: 10px;
+}
+
+.landingProduct .productHeroTitle {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 2.875rem);
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  line-height: 1.08;
+}
+
+.landingProduct .productHeroSubtitle {
+  margin: 4px 0 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  opacity: 0.85;
 }
 
 .productHeroSubtitle {
-  margin: 0 0 10px;
+  margin: 0 0 18px;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--text);
+  line-height: 1.4;
 }
 
 .productHeroDescription {
@@ -1107,34 +1252,248 @@ img {
   font-weight: 700;
 }
 
-.productHeroOfferDesktop {
-  display: none;
-}
-
-.productHeroOfferMobile {
-  padding: 0 20px 16px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
 .productOfferBox {
   padding: 20px;
   background: var(--price-bg);
   border-radius: 14px;
 }
 
+.productOfferBoxConversion {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.productPriceBoxHero {
+  margin-bottom: 16px;
+}
+
+.productPriceBoxHero .productPriceLabel {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.productPriceBoxHero .productPriceMain {
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  font-weight: 900;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.landingProduct .productPriceBoxHero {
+  margin-bottom: 10px;
+}
+
+.landingProduct .productPriceBoxHero .productPriceLabel {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.landingProduct .productPriceBoxHero .productPriceMain {
+  font-size: clamp(2.75rem, 7vw, 3.5rem);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.productHeroHook {
+  margin: 0 0 10px;
+  display: grid;
+  gap: 2px;
+}
+
+.productHeroHook span:first-child {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.productHeroHook span:last-child {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.productInsuranceCompact {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(75, 44, 145, 0.06);
+  border: 1px solid rgba(75, 44, 145, 0.12);
+}
+
+.productInsuranceCompact svg {
+  color: var(--navy);
+  flex-shrink: 0;
+}
+
+.productInsuranceCompactCopy {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+}
+
+.productInsuranceCompactCopy strong {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.productInsuranceCompactCopy span {
+  font-size: 0.625rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.productHeroSocialProof {
+  margin: 8px 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.productPriceBoxHero .productPriceUnit {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.productPriceBoxHero .productPricePtf {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  border-top-color: rgba(7, 27, 53, 0.12);
+}
+
+.landingProduct .productPriceBoxHero .productPricePtf {
+  color: #6b7280;
+}
+
+.landingProduct .insuranceBadgeHero {
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  background: rgba(75, 44, 145, 0.1);
+  border: 1px solid rgba(75, 44, 145, 0.22);
+  border-radius: 12px;
+  gap: 10px 12px;
+}
+
+.landingProduct .insuranceBadgeHero .insuranceBadgeIcon {
+  width: 44px;
+  height: 44px;
+  padding: 9px;
+  border-radius: 50%;
+  background: rgba(75, 44, 145, 0.14);
+}
+
+.insuranceBadgeHero {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+}
+
+.landingProduct .insuranceBadgeHero .insuranceBadgeTitle {
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+.insuranceBadgeHero .insuranceBadgeTitle {
+  font-size: 0.8125rem;
+}
+
+.insuranceBadgeHero .insuranceBadgeSub {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  width: 100%;
+}
+
+.productHeroTrust {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 8px;
+}
+
+.productHeroTrust li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.productHeroTrust svg {
+  color: var(--brand-green);
+  flex-shrink: 0;
+}
+
+.landingProduct .productHeroTrustGrid {
+  margin: 10px 0 0;
+  padding: 0;
+  border-top: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 10px;
+  list-style: none;
+}
+
+.landingProduct .productHeroTrustGrid li {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  line-height: 1.3;
+}
+
+.landingProduct .productHeroTrustGrid li::before {
+  content: "✓ ";
+  color: var(--brand-green);
+  font-weight: 700;
+}
+
+.landingProduct .productCardLegal {
+  margin-top: 8px;
+  font-size: 0.625rem;
+  color: #9ca3af;
+}
+
+.landingProduct .btnYellow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 24px;
+  font-size: 1rem;
+  box-shadow: 0 6px 18px rgba(255, 193, 7, 0.55);
+}
+
 .productGallery {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
+  margin-bottom: 0;
 }
 
 .productGalleryMain {
   position: relative;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
   background: var(--price-bg);
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 5 / 4;
+  box-shadow: 0 8px 32px rgba(7, 27, 53, 0.1);
 }
 
 .productGalleryMainImage {
@@ -1174,8 +1533,148 @@ img {
   cursor: pointer;
 }
 
+.landingProduct .productGalleryThumb {
+  flex: 0 0 84px;
+  height: 84px;
+  border-radius: 12px;
+}
+
 .productGalleryThumb.isActive {
   border-color: var(--navy);
+}
+
+.landingProduct .productGalleryThumb.isActive {
+  border-width: 3px;
+  border-color: var(--navy);
+  box-shadow: 0 0 0 2px rgba(75, 44, 145, 0.28);
+}
+
+.productMainBenefits {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 4px 20px 12px;
+}
+
+.productMainBenefitsTitle {
+  margin: 0 0 10px;
+  font-size: 1.125rem;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.productPurchaseBenefits {
+  max-width: 1180px;
+  margin: 0 auto 16px;
+  padding: 0 20px 12px;
+}
+
+.productPurchaseBenefitsTitle {
+  margin: 0 0 10px;
+  font-size: 1.125rem;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.productPurchaseBenefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.productPurchaseBenefitCard {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(75, 44, 145, 0.05);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+}
+
+.productPurchaseBenefitIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--soft-navy);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .productPurchaseBenefitsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .productPurchaseBenefitsGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.productMainBenefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.productMainBenefitCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 2px;
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--soft-navy);
+}
+
+.productMainBenefitIcon {
+  grid-row: 1 / span 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  align-self: start;
+}
+
+.productMainBenefitCard strong {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.productMainBenefitCard p {
+  margin: 0;
+  grid-column: 2;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .productMainBenefitsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .productMainBenefitsGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
 }
 
 .productGalleryThumbImage {
@@ -1189,18 +1688,55 @@ img {
 .insuranceSection,
 .productBenefitsSection,
 .relatedProducts {
-  max-width: 1100px;
-  margin: 0 auto 24px;
-  padding: 0 20px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px 32px;
 }
 
 .productIncludesSection h2,
 .productDetailsSection h2,
 .relatedProducts h2 {
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--navy);
+}
+
+.productIncludesCompact {
+  padding-top: 4px;
+  padding-bottom: 24px;
+}
+
+.productIncludesCompact h2 {
+  margin-bottom: 8px;
+  font-size: 1.125rem;
+}
+
+.productIncludesGrid {
+  list-style: none;
+  margin: 0;
+  padding: 10px 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 12px;
+  background: var(--soft-navy);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.productIncludesGrid li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+}
+
+.productIncludesGrid svg {
+  color: var(--brand-green);
+  flex-shrink: 0;
 }
 
 .productIncludesList {
@@ -1329,6 +1865,70 @@ img {
   color: var(--text-muted);
 }
 
+.productBenefitsConversion {
+  padding-bottom: 32px;
+}
+
+.productBenefitsConversionInner {
+  padding: 24px;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(7, 27, 53, 0.08);
+}
+
+.productBenefitsConversionHead h2 {
+  margin: 0 0 6px;
+  font-size: 1.375rem;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.productBenefitsConversionHead p {
+  margin: 0 0 18px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.productBenefitsTiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.productBenefitTile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--soft-navy);
+}
+
+.productBenefitTileIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--white);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+
+.productBenefitTile strong {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.productBenefitTile small {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
 .productBenefitsInner {
   display: flex;
   gap: 16px;
@@ -1378,10 +1978,106 @@ img {
   color: var(--green);
 }
 
+.relatedProductsConversion {
+  padding-bottom: 32px;
+}
+
+.relatedProductsConversion h2 {
+  margin-bottom: 14px;
+}
+
 .relatedProductsGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 14px;
+  gap: 20px;
+}
+
+.relatedCardLarge {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 28px rgba(7, 27, 53, 0.1);
+}
+
+.relatedCardLargeMedia {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--price-bg);
+  min-height: 200px;
+}
+
+.relatedCardLargeImage,
+.relatedCardLargeMedia .productImageFallback {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.relatedCardLargeMedia:hover .relatedCardLargeImage {
+  transform: scale(1.03);
+}
+
+.relatedCardLargeBody {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.relatedCardLargeBody h3 {
+  margin: 0 0 8px;
+  font-size: 1.125rem;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.relatedCardLargePrice {
+  margin-bottom: 12px;
+}
+
+.relatedCardLargePriceLabel {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+
+.relatedCardLargePriceAmount {
+  display: block;
+  font-size: 1.625rem;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.relatedCardLargeCtas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.relatedCardLargeLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.relatedCardLargeLink:hover {
+  color: var(--green);
 }
 
 .relatedCard {
@@ -1475,18 +2171,153 @@ img {
   text-decoration: none;
 }
 
+.flowBlockProduct {
+  max-width: 1180px;
+  margin: 0 auto 12px;
+  padding: 8px 20px 4px;
+  text-align: center;
+}
+
+.productMidCta {
+  margin: 8px 0 24px;
+  padding: 28px 20px;
+  background: linear-gradient(180deg, var(--soft-navy) 0%, #e8e0f4 100%);
+  border-top: 1px solid rgba(75, 44, 145, 0.14);
+  border-bottom: 1px solid rgba(75, 44, 145, 0.14);
+}
+
+.productMidCtaInner {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.productMidCta h2 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.productMidCtaCopy {
+  margin: 0 0 16px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.productMidCta .btnYellow {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.flowBlockProductTop {
+  margin-top: 0;
+  margin-bottom: 8px;
+  padding: 12px 20px 10px;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.flowBlockProduct h2 {
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.flowBlockProduct .flowSteps {
+  gap: 10px;
+}
+
+.flowBlockProduct .flowStep {
+  padding: 10px 8px;
+}
+
+.flowBlockProduct .flowStep h3 {
+  font-size: 0.9375rem;
+  margin-bottom: 5px;
+}
+
+.flowBlockProduct .flowStep p {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.productFinalCta {
+  background: var(--navy);
+  padding: 40px 20px 48px;
+  margin-top: 0;
+}
+
+.productFinalCtaInner {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.productFinalCta h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.productFinalCta p {
+  margin: 0 0 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.5;
+}
+
+.productFinalTrust {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 20px;
+}
+
+.productFinalTrust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.productFinalTrust svg {
+  color: var(--yellow);
+  flex-shrink: 0;
+}
+
+@media (min-width: 600px) {
+  .productBenefitsTiles {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
 @media (min-width: 900px) {
   .productHeroGrid {
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: 1.85fr 1fr;
+    gap: 28px;
     align-items: start;
   }
 
-  .productHeroOfferDesktop {
-    display: block;
+  .productIncludesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: 10px 16px;
+    gap: 8px 12px;
   }
 
-  .productHeroOfferMobile {
-    display: none;
+  .productIncludesGrid li {
+    font-size: 0.75rem;
   }
 
   .productDetailsGrid {
@@ -1495,6 +2326,14 @@ img {
 
   .relatedProductsGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .flowBlockProduct .flowSteps {
+    gap: 8px;
+  }
+
+  .flowBlockProduct .flowStep {
+    padding: 16px 12px;
   }
 }
 
@@ -1952,27 +2791,31 @@ img {
     padding: 16px 40px;
   }
 
-  .brandTagInline {
-    margin-top: -8px;
-    margin-right: 6px;
+  .brandLogo {
+    gap: 8px;
   }
 
   .brandTag {
-    width: 30px;
-    height: 34px;
+    width: 36px;
+    height: 40px;
+  }
+
+  .brandTagHole {
+    width: 6px;
+    height: 6px;
   }
 
   .brandTagPct {
-    font-size: 15px;
-    margin-top: 7px;
-  }
-
-  .brandTagCord {
-    width: 14px;
+    font-size: 16px;
+    margin-top: 8px;
   }
 
   .brandLogoTitle {
     font-size: 21px;
+  }
+
+  .credizonaLogo {
+    height: 20px;
   }
 
   .productsBlock {
@@ -1990,11 +2833,16 @@ img {
   }
 
   .productHero,
+  .productMainBenefits,
+  .productPurchaseBenefits,
   .productIncludesSection,
   .productDetailsSection,
   .insuranceSection,
   .productBenefitsSection,
-  .relatedProducts {
+  .relatedProducts,
+  .flowBlockProduct,
+  .productMidCta,
+  .productFinalCta {
     padding-inline: 40px;
   }
 }
@@ -2040,6 +2888,14 @@ img {
     max-height: 200px;
   }
 
+  .productBenefitsTiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .productFinalCta {
+    padding-inline: 16px;
+  }
+
   .productGalleryThumbs {
     overflow-x: auto;
     overflow-y: hidden;
@@ -2050,8 +2906,8 @@ img {
   }
 
   .productGalleryThumb {
-    flex: 0 0 64px;
-    height: 64px;
+    flex: 0 0 80px;
+    height: 80px;
   }
 
   .productBreadcrumb {

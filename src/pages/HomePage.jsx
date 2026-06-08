@@ -10,7 +10,7 @@ import NotQualifiedBlock from "../components/sections/NotQualifiedBlock";
 import FinalCtaSection from "../components/sections/FinalCtaSection";
 import usePageSeo from "../hooks/usePageSeo";
 import { useWizardLauncher } from "../hooks/useWizardLauncher";
-import { ENTRY_PATH } from "../utils/applicationFlow";
+import { buildProductContext, ENTRY_PATH } from "../utils/applicationFlow";
 import { SITE_SEO } from "../utils/seo";
 import {
   getFeaturedProduct,
@@ -21,7 +21,7 @@ import { track } from "../services/tracking";
 export default function HomePage() {
   const products = listVisibleProducts();
   const mainProduct = getFeaturedProduct();
-  const { wizardProduct, openWizard, closeWizard } = useWizardLauncher();
+  const { wizardProduct, wizardContext, openWizard, closeWizard } = useWizardLauncher();
 
   usePageSeo(SITE_SEO);
 
@@ -36,19 +36,26 @@ export default function HomePage() {
       <TrustBlock />
       <WhyZonaSection />
       <HowItWorksSection />
-      <ProductsSection
-        products={products}
-        onOpenWizard={(product) => openWizard(product, ENTRY_PATH.HOME_PRODUCT_CARD)}
-      />
+      <ProductsSection products={products} onOpenWizard={openWizard} />
       <NotQualifiedBlock />
       <FinalCtaSection
         onOpenWizard={() =>
-          mainProduct && openWizard(mainProduct, ENTRY_PATH.HOME_FINAL_CTA)
+          mainProduct &&
+          openWizard(
+            mainProduct,
+            buildProductContext(mainProduct, ENTRY_PATH.HOME_FEATURED_PRODUCT)
+          )
         }
       />
       <SiteFooter />
 
-      {wizardProduct && <Wizard product={wizardProduct} onClose={closeWizard} />}
+      {wizardProduct && (
+        <Wizard
+          product={wizardProduct}
+          productContext={wizardContext}
+          onClose={closeWizard}
+        />
+      )}
     </main>
   );
 }

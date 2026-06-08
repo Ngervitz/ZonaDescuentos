@@ -66,7 +66,7 @@ export async function submitLead(payload) {
   };
 }
 
-export function buildLeadPayload({ product, form, clientStatus }) {
+export function buildLeadPayload({ product, form, clientStatus, productContext }) {
   return {
     contact: {
       name: form.name,
@@ -90,6 +90,11 @@ export function buildLeadPayload({ product, form, clientStatus }) {
       income: form.income,
       employment: form.employment,
       department: form.department,
+    },
+    context: {
+      entry_path: productContext?.entry_path || null,
+      product_category: productContext?.product_category || null,
+      product_total_price: productContext?.product_total_price || null,
     },
     meta: {
       created_at: new Date().toISOString(),

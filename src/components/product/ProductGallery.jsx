@@ -1,47 +1,44 @@
 import { useEffect, useMemo, useState } from "react";
+import { resolveGallerySources } from "../../utils/productImage";
 import ProductImage from "../ui/ProductImage";
 
-function resolveGalleryImages(product) {
-  const fromGallery = product.gallery?.filter(Boolean) ?? [];
-  if (fromGallery.length > 0) return fromGallery;
-  if (product.mainImage) return [product.mainImage];
-  return [];
+function resolveStockBadge(product) {
+  const stock = product.stockVisual ?? product.units;
+  if (stock == null || stock >= 20) return null;
+  return "Lote limitado";
 }
 
 export default function ProductGallery({ product }) {
-  const images = useMemo(() => resolveGalleryImages(product), [product]);
+  const images = useMemo(() => resolveGallerySources(product), [product]);
+  const stockBadge = resolveStockBadge(product);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     setActiveIndex(0);
   }, [product.slug]);
 
-  if (images.length === 0) {
-    return (
-      <div className="productGallery">
-        <div className="productGalleryMain">
-          <ProductImage src={null} alt={product.name || "Producto"} eager />
-        </div>
-      </div>
-    );
-  }
+  const activeImage = images[activeIndex] ?? images[0];
 
   return (
     <div className="productGallery">
       <div className="productGalleryMain">
-        {product.isMain && <span className="productGalleryFeatured">DESTACADO</span>}
+        {stockBadge && (
+          <span className="productGalleryFeatured">{stockBadge}</span>
+        )}
         <ProductImage
-          src={images[activeIndex]}
-          alt={`${product.name} - imagen ${activeIndex + 1}`}
+          src={activeImage?.src}
+          product={product}
+          galleryIndex={activeImage?.index ?? activeIndex}
+          alt={product.name || "Producto"}
           className="productGalleryMainImage"
           eager
         />
       </div>
       {images.length > 1 && (
         <div className="productGalleryThumbs" role="tablist" aria-label="Miniaturas">
-          {images.map((src, index) => (
+          {images.map((image, index) => (
             <button
-              key={`${src}-${index}`}
+              key={`${image.src ?? "temp"}-${image.index}-${index}`}
               type="button"
               role="tab"
               aria-selected={index === activeIndex}
@@ -49,7 +46,13 @@ export default function ProductGallery({ product }) {
               className={`productGalleryThumb${index === activeIndex ? " isActive" : ""}`}
               onClick={() => setActiveIndex(index)}
             >
-              <ProductImage src={src} alt="" className="productGalleryThumbImage" />
+              <ProductImage
+                src={image.src}
+                product={product}
+                galleryIndex={image.index}
+                alt=""
+                className="productGalleryThumbImage"
+              />
             </button>
           ))}
         </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Lock } from "lucide-react";
 import { formatProductPrice } from "../../data/products";
+import { buildProductContext, ENTRY_PATH } from "../../utils/applicationFlow";
 import ProductImage from "../ui/ProductImage";
 import YellowButton from "../ui/YellowButton";
 import InsuranceBadge from "../product/InsuranceBadge";
@@ -27,6 +28,7 @@ export default function ProductCard({ product, onOpenWizard }) {
         <Link to={`/producto/${product.slug}`} className="productCardMediaLink">
           <ProductImage
             src={product.mainImage}
+            product={product}
             alt={product.name || "Producto"}
             className="productCardImage"
           />
@@ -77,7 +79,15 @@ export default function ProductCard({ product, onOpenWizard }) {
 
         <div className="productCardCtas">
           {canApply ? (
-            <YellowButton onClick={() => onOpenWizard(product)} fullWidth>
+            <YellowButton
+              onClick={() =>
+                onOpenWizard(
+                  product,
+                  buildProductContext(product, ENTRY_PATH.PRODUCT_CARD)
+                )
+              }
+              fullWidth
+            >
               Ver si califico
             </YellowButton>
           ) : (

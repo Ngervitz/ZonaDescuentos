@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import {
   BadgeCheck,
+  ChevronRight,
   CreditCard,
   ShoppingCart,
   Truck,
@@ -30,20 +31,24 @@ const FLOW_STEPS = [
   },
 ];
 
-export default function HowItWorksSection() {
+export default function HowItWorksSection({ compact = false, top = false }) {
+  const classes = ["flowBlock"];
+  if (compact) classes.push("flowBlockProduct");
+  if (top) classes.push("flowBlockProductTop");
+
   return (
-    <section className="flowBlock">
+    <section className={classes.join(" ")}>
       <h2>¿Cómo funciona?</h2>
       <div className="flowSteps">
         {FLOW_STEPS.map((step, index) => {
           const Icon = step.icon;
           return (
             <div className="flowStepWrap" key={step.title}>
-              <article className="flowStep">
+              <article className={`flowStep flowStep--${index + 1}`}>
                 <div className="flowStepVisual">
                   <span className="flowStepNumber">{index + 1}</span>
                   <div className="flowStepIcon">
-                    <Icon size={24} strokeWidth={2} />
+                    <Icon size={28} strokeWidth={2.2} />
                   </div>
                 </div>
                 <h3>{step.title}</h3>
@@ -56,14 +61,7 @@ export default function HowItWorksSection() {
               </article>
               {index < FLOW_STEPS.length - 1 && (
                 <div className="flowArrow" aria-hidden="true">
-                  <svg width="24" height="12" viewBox="0 0 24 12" fill="none">
-                    <path
-                      d="M0 6h16M16 6l-3-3M16 6l-3 3"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                  <ChevronRight className="flowArrowIcon" size={30} strokeWidth={2.5} />
                 </div>
               )}
             </div>

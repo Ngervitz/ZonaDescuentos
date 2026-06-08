@@ -1,76 +1,32 @@
-import { Link } from "react-router-dom";
+import {
+  getProductDisplaySubtitle,
+  getProductDisplayTitle,
+} from "../../utils/productDisplay";
 import ProductGallery from "./ProductGallery";
 import ProductOfferBox from "./ProductOfferBox";
-import { resolveIcon } from "../../utils/icons";
-
-const BADGE_VARIANTS = {
-  "12 cuotas": "green",
-  "Sin tarjeta": "navy",
-  "Seguro incluido": "navy",
-};
-
-function badgeVariant(label) {
-  return BADGE_VARIANTS[label] ?? "navy";
-}
 
 export default function ProductHero({ product, onOpenWizard }) {
-  const badges = product.badges ?? [];
+  const title = getProductDisplayTitle(product);
+  const subtitle = getProductDisplaySubtitle(product);
 
   return (
-    <section className="productHero">
-      <nav className="productBreadcrumb" aria-label="Breadcrumb">
-        <Link to="/">Inicio</Link>
-        <span aria-hidden="true">›</span>
-        <Link to="/#productos">Productos</Link>
-        <span aria-hidden="true">›</span>
-        <span>{product.name}</span>
-      </nav>
-
+    <section className="productHero productHeroConversion">
       <div className="productHeroGrid">
-        <ProductGallery product={product} />
-
-        <div className="productHeroInfo">
-          {badges.length > 0 && (
-            <div className="productCardBadges">
-              {badges.map((label) => (
-                <span
-                  className={`productBadge productBadge--${badgeVariant(label)}`}
-                  key={label}
-                >
-                  {label}
-                </span>
-              ))}
-            </div>
-          )}
-
-          <h1>{product.name}</h1>
-          {product.subtitle && <p className="productHeroSubtitle">{product.subtitle}</p>}
-          {product.shortDescription && (
-            <p className="productHeroDescription">{product.shortDescription}</p>
-          )}
-
-          {product.extras?.length > 0 && (
-            <ul className="productExtras">
-              {product.extras.map((extra) => {
-                const Icon = resolveIcon(extra.icon);
-                return (
-                  <li key={extra.id}>
-                    <Icon size={16} strokeWidth={2.2} />
-                    <span>{extra.label}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-
-          <div className="productHeroOfferDesktop">
-            <ProductOfferBox product={product} onOpenWizard={onOpenWizard} />
-          </div>
+        <div className="productHeroMedia">
+          <ProductGallery product={product} />
         </div>
-      </div>
 
-      <div className="productHeroOfferMobile">
-        <ProductOfferBox product={product} onOpenWizard={onOpenWizard} />
+        <div className="productHeroAside">
+          <div className="productHeroHeading">
+            <h1 className="productHeroTitle">{title}</h1>
+            {subtitle && <p className="productHeroSubtitle">{subtitle}</p>}
+          </div>
+          <ProductOfferBox
+            product={product}
+            onOpenWizard={onOpenWizard}
+            variant="conversion"
+          />
+        </div>
       </div>
     </section>
   );
