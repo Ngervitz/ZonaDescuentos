@@ -1811,6 +1811,7 @@ img {
 /* Benefits page */
 .benefitsPage {
   background: var(--gray-bg);
+  overflow-x: hidden;
 }
 
 .benefitsHero {
@@ -1981,4 +1982,148 @@ img {
   .flowBlock {
     padding-inline: 40px;
   }
+
+  .trustBlock,
+  .whyZonaBlock,
+  .notQualifiedBlock {
+    padding-inline: 40px;
+  }
+
+  .productHero,
+  .productIncludesSection,
+  .productDetailsSection,
+  .insuranceSection,
+  .productBenefitsSection,
+  .relatedProducts {
+    padding-inline: 40px;
+  }
+}
+
+/* Responsive audit — mobile / tablet */
+@media (max-width: 767px) {
+  .siteHeader,
+  .siteFooter {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  .siteHeaderRight,
+  .siteFooterRight {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .trustBlockInner,
+  .notQualifiedBlockInner,
+  .productBenefitsInner,
+  .insuranceSectionInner {
+    flex-direction: column;
+  }
+
+  .productCardCtas {
+    gap: 8px;
+  }
+
+  .productCardSecondaryCta {
+    width: 100%;
+  }
+
+  .relatedCard {
+    grid-template-columns: 1fr;
+  }
+
+  .relatedCardMedia {
+    aspect-ratio: 16 / 9;
+    max-height: 200px;
+  }
+
+  .productGalleryThumbs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    max-width: 100%;
+    padding-bottom: 4px;
+  }
+
+  .productGalleryThumb {
+    flex: 0 0 64px;
+    height: 64px;
+  }
+
+  .productBreadcrumb {
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+
+  .flowBlock {
+    padding-inline: 16px;
+    overflow-x: hidden;
+  }
+
+  .flowStep {
+    max-width: none;
+    padding-inline: 4px;
+  }
+
+  .finalBlock {
+    margin-inline: 16px;
+    padding: 24px 20px;
+  }
+
+  .benefitsHero,
+  .benefitsCategory,
+  .benefitsDisclaimer {
+    padding-inline: 16px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  .flowSteps {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .flowStepWrap {
+    flex: 0 1 calc(50% - 8px);
+    flex-direction: column;
+  }
+
+  .flowArrow {
+    display: none;
+  }
+
+  .productCard {
+    grid-template-columns: 1fr;
+  }
+
+  .productHeroGrid {
+    gap: 20px;
+  }
+}
+
+.benefitsCategory,
+.benefitsHero,
+.benefitsCardsGrid {
+  max-width: 100%;
+}
+
+.benefitCard {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.productGallery,
+.productGalleryMain {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.landing,
+.landingProduct {
+  overflow-x: hidden;
 }
