@@ -1,3 +1,10 @@
+// Local catalog source — consumed via services/productCatalog.js
+// TODO: replace local products.js with API/CMS source
+// TODO: support admin-managed product catalog
+// TODO: keep product schema backwards compatible
+// TODO: support product visibility rules from API
+// TODO: support future pricing updates from API
+
 export const MAIN_PRODUCT_SLUG = "sommier-colchon-2-plazas";
 
 export const products = [
@@ -177,20 +184,44 @@ function formatPrice(amount) {
 export function normalizeProduct(product) {
   if (!product) return null;
 
+  const priceMonthly = Number(product.priceMonthly) || 0;
+  const installments = Number(product.installments) || 12;
+  const totalPrice = Number(product.totalPrice) || priceMonthly * installments;
+  const mainImage = product.mainImage || product.image || null;
+  const rawGallery = Array.isArray(product.gallery) ? product.gallery.filter(Boolean) : [];
+  const gallery = rawGallery.length > 0 ? rawGallery : mainImage ? [mainImage] : [];
+
   return {
     ...product,
-    image: product.mainImage,
-    shortName: product.subtitle,
-    description: product.shortDescription,
+    mainImage,
+    gallery,
+    badges: Array.isArray(product.badges) ? product.badges.filter(Boolean) : [],
+    extras: Array.isArray(product.extras) ? product.extras.filter((e) => e?.id && e?.label) : [],
+    features: Array.isArray(product.features) ? product.features.filter(Boolean) : [],
+    specs: Array.isArray(product.specs)
+      ? product.specs.filter((spec) => spec?.label && spec?.value)
+      : [],
+    recommendedFor: Array.isArray(product.recommendedFor)
+      ? product.recommendedFor.filter(Boolean)
+      : [],
+    includes: Array.isArray(product.includes) ? product.includes.filter(Boolean) : [],
+    conditions: Array.isArray(product.conditions) ? product.conditions.filter(Boolean) : [],
+    insuranceIncluded: product.insuranceIncluded === true,
+    image: mainImage,
+    shortName: product.subtitle ?? "",
+    description: product.shortDescription ?? "",
     isActive: product.status === "active",
     isOperable: product.status === "active",
     isVisible: product.status === "active" || product.status === "coming_soon",
+    priceMonthly,
+    installments,
+    totalPrice,
     pricing: {
-      monthly: product.priceMonthly,
-      monthlyFormatted: formatPrice(product.priceMonthly),
-      installments: product.installments,
-      installmentsLabel: `${product.installments} cuotas`,
-      note: `${product.installments} cuotas sin recargo`,
+      monthly: priceMonthly,
+      monthlyFormatted: formatPrice(priceMonthly),
+      installments,
+      installmentsLabel: `${installments} cuotas`,
+      note: `${installments} cuotas sin recargo`,
     },
   };
 }
