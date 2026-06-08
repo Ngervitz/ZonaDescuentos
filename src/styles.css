@@ -396,9 +396,156 @@ img {
   }
 }
 
+/* Trust block */
+.trustBlock {
+  padding: 28px 20px 8px;
+}
+
+.trustBlockInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(75, 44, 145, 0.08);
+}
+
+.trustBlockInner h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.25rem, 3vw, 1.625rem);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.25;
+}
+
+.trustBlockInner > p {
+  margin: 0 0 18px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.trustBlockList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.trustBlockList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.trustBlockList svg {
+  color: var(--brand-green);
+  flex-shrink: 0;
+}
+
+/* Why Zona */
+.whyZonaBlock {
+  padding: 24px 20px;
+}
+
+.whyZonaBlockInner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.whyZonaBlockInner h2 {
+  margin: 0 0 10px;
+  font-size: clamp(1.25rem, 3vw, 1.625rem);
+  font-weight: 800;
+  color: var(--navy);
+  text-align: center;
+}
+
+.whyZonaLead {
+  margin: 0 auto 24px;
+  max-width: 720px;
+  text-align: center;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.whyZonaGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.whyZonaCard {
+  padding: 20px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+}
+
+.whyZonaCardIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--soft-navy);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+
+.whyZonaCard h3 {
+  margin: 0 0 6px;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.whyZonaCard p {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+@media (min-width: 640px) {
+  .whyZonaGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .whyZonaGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* Product cards */
 .productsBlock {
   padding: 8px 20px 32px;
+}
+
+.productsBlockHeader {
+  max-width: 1100px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.productsBlockHeader h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.productsBlockHeader p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 .productsBlockInner {
@@ -426,10 +573,67 @@ img {
   overflow: hidden;
 }
 
-.productCardMedia img {
+.productCardMediaLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.productCardMedia img,
+.productCardImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.productCardTitleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.productCardTitleLink:hover {
+  color: var(--navy);
+}
+
+.productCardCtas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.productCardSecondaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.productCardSecondaryCta:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+.productImageFallback {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: var(--price-bg);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .productCardFeatured {
@@ -605,6 +809,17 @@ img {
   flex-shrink: 0;
 }
 
+.insuranceBadgeCompact .insuranceBadgeCopy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.insuranceBadgeCompact .insuranceBadgeTitle {
+  margin: 0;
+}
+
 .sancorBrandLogo {
   height: 18px;
   width: auto;
@@ -731,6 +946,556 @@ img {
 .btnYellowCompact {
   padding: 12px 18px;
   font-size: 0.875rem;
+}
+
+/* Not qualified block */
+.notQualifiedBlock {
+  padding: 0 20px 24px;
+}
+
+.notQualifiedBlockInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(75, 44, 145, 0.08);
+}
+
+.notQualifiedIcon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--soft-navy);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+}
+
+.notQualifiedCopy h2 {
+  margin: 0 0 8px;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.notQualifiedCopy p {
+  margin: 0 0 14px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.btnNotify {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(75, 44, 145, 0.25);
+  transition: transform 0.15s ease;
+}
+
+.btnNotify:hover {
+  transform: translateY(-1px);
+}
+
+.btnComingSoon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--price-bg);
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+.btnComingSoonFull {
+  width: 100%;
+}
+
+/* Product page */
+.landingProduct {
+  padding-bottom: 24px;
+}
+
+.productHero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 20px 8px;
+}
+
+.productBreadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.productBreadcrumb a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.productBreadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.productHeroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.productHeroInfo h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.productHeroSubtitle {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.productHeroDescription {
+  margin: 0 0 16px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.productExtras {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.productExtras li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--soft-navy);
+  color: var(--navy);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.productHeroOfferDesktop {
+  display: none;
+}
+
+.productHeroOfferMobile {
+  padding: 0 20px 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.productOfferBox {
+  padding: 20px;
+  background: var(--price-bg);
+  border-radius: 14px;
+}
+
+.productGallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.productGalleryMain {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--price-bg);
+  aspect-ratio: 4 / 3;
+}
+
+.productGalleryMainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productGalleryFeatured {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.productGalleryThumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.productGalleryThumb {
+  flex: 0 0 72px;
+  height: 72px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--price-bg);
+  cursor: pointer;
+}
+
+.productGalleryThumb.isActive {
+  border-color: var(--navy);
+}
+
+.productGalleryThumbImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.productIncludesSection,
+.productDetailsSection,
+.insuranceSection,
+.productBenefitsSection,
+.relatedProducts {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding: 0 20px;
+}
+
+.productIncludesSection h2,
+.productDetailsSection h2,
+.relatedProducts h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.productIncludesList {
+  list-style: none;
+  margin: 0;
+  padding: 20px;
+  display: grid;
+  gap: 10px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+}
+
+.productIncludesList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.productIncludesList svg {
+  color: var(--brand-green);
+  flex-shrink: 0;
+}
+
+.productDetailsLead {
+  margin: 0 0 18px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.productDetailsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.detailCard {
+  padding: 20px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+}
+
+.detailCard h3 {
+  margin: 0 0 12px;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.detailCard ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.detailCardWide {
+  grid-column: 1 / -1;
+}
+
+.specsList {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.specsRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.8125rem;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.specsRow dt {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.specsRow dd {
+  margin: 0;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.insuranceSectionInner {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 24px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+}
+
+.insuranceSectionIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--soft-navy);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.insuranceSectionCopy h2 {
+  margin: 0 0 8px;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.insuranceSectionCopy p {
+  margin: 0 0 10px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.productBenefitsInner {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 24px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(75, 44, 145, 0.08);
+}
+
+.productBenefitsIcon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--soft-navy);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+}
+
+.productBenefitsCopy h2 {
+  margin: 0 0 8px;
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.productBenefitsCopy p {
+  margin: 0 0 10px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.productBenefitsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.productBenefitsLink:hover {
+  color: var(--green);
+}
+
+.relatedProductsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.relatedCard {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 14px;
+  padding: 14px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+}
+
+.relatedCardMedia {
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  background: var(--price-bg);
+}
+
+.relatedCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.relatedCardBody h3 {
+  margin: 0 0 4px;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.relatedCardSubtitle {
+  margin: 0 0 6px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.relatedCardPrice {
+  margin: 0 0 10px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.relatedCardCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.relatedCardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.relatedCardWizardBtn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 999px;
+  background: var(--yellow);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.productNotFound {
+  text-align: center;
+  padding: 48px 20px 64px;
+}
+
+.productNotFound p {
+  margin: 0 0 20px;
+  color: var(--text-muted);
+}
+
+.notFoundCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (min-width: 900px) {
+  .productHeroGrid {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+
+  .productHeroOfferDesktop {
+    display: block;
+  }
+
+  .productHeroOfferMobile {
+    display: none;
+  }
+
+  .productDetailsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .relatedProductsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* More benefits block */
