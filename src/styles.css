@@ -291,6 +291,270 @@ img {
   }
 }
 
+.landingProduct .productPagePromoBarCompact .productPagePromoItem {
+  padding: 10px 12px;
+  font-size: 0.6875rem;
+}
+
+@media (min-width: 768px) {
+  .landingProduct .productPagePromoBarCompact .productPagePromoItem {
+    font-size: 0.75rem;
+    padding: 11px 10px;
+  }
+}
+
+.landingProduct .productSheetSection {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px 24px;
+}
+
+.landingProduct .productSheetSection h2 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--navy);
+}
+
+.landingProduct .productSheetIncludesList {
+  list-style: none;
+  margin: 0;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  background: var(--soft-navy);
+  border-radius: 12px;
+}
+
+.landingProduct .productSheetIncludesList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+}
+
+.landingProduct .productSheetIncludesList li span {
+  color: var(--brand-green);
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.landingProduct .productSheetSpecsTableWrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+}
+
+.landingProduct .productSheetSpecsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.landingProduct .productSheetSpecsTable th,
+.landingProduct .productSheetSpecsTable td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+.landingProduct .productSheetSpecsTable thead th {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: var(--soft-navy);
+}
+
+.landingProduct .productSheetSpecsTable tbody th {
+  font-weight: 700;
+  color: var(--text);
+  width: 42%;
+}
+
+.landingProduct .productSheetSpecsTable tbody td {
+  color: var(--text-muted);
+}
+
+.landingProduct .productSheetSpecsTable tbody tr:last-child th,
+.landingProduct .productSheetSpecsTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.landingProduct .productSheetFeatures {
+  margin-top: 20px;
+}
+
+.landingProduct .productSheetFeaturesList {
+  margin: 0;
+  padding: 14px 16px 14px 28px;
+  display: grid;
+  gap: 8px;
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.landingProduct .productSheetInsuranceCard,
+.landingProduct .productSheetDeliveryCard {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px;
+  background: var(--white);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+}
+
+.landingProduct .productSheetInsuranceIcon,
+.landingProduct .productSheetDeliveryIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--soft-navy);
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.landingProduct .productSheetInsuranceCopy p,
+.landingProduct .productSheetDeliveryCopy p {
+  margin: 0 0 8px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.landingProduct .productSheetInsuranceCopy p:last-child,
+.landingProduct .productSheetDeliveryCopy p:last-child {
+  margin-bottom: 0;
+}
+
+.landingProduct .productSheetInsuranceProvider {
+  font-weight: 800;
+  color: var(--navy) !important;
+}
+
+.landingProduct .productSheetInsuranceDuration {
+  font-weight: 700;
+  color: var(--text) !important;
+}
+
+.landingProduct .productSheetPreFaqCta {
+  margin: 4px 0 28px;
+  padding: 32px 20px;
+  background: linear-gradient(135deg, var(--navy) 0%, #3d2578 55%, #2a1a5c 100%);
+}
+
+.landingProduct .productSheetPreFaqCtaInner {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.landingProduct .productSheetPreFaqCta h2 {
+  margin: 0 0 8px;
+  font-size: clamp(1.375rem, 3.5vw, 1.75rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.landingProduct .productSheetPreFaqCta p {
+  margin: 0 0 18px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.45;
+}
+
+.landingProduct .productSheetPreFaqCta .btnYellow {
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.landingProduct .productSheetFaqList {
+  display: grid;
+  gap: 8px;
+}
+
+.landingProduct .productSheetFaqItem {
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 2px 12px rgba(75, 44, 145, 0.08);
+  overflow: hidden;
+}
+
+.landingProduct .productSheetFaqTrigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: var(--navy);
+  text-align: left;
+  cursor: pointer;
+}
+
+.landingProduct .productSheetFaqTrigger svg {
+  flex-shrink: 0;
+  color: var(--navy);
+  transition: transform 0.2s ease;
+}
+
+.landingProduct .productSheetFaqItem.isOpen .productSheetFaqTrigger svg {
+  transform: rotate(180deg);
+}
+
+.landingProduct .productSheetFaqPanel {
+  padding: 0 16px 14px;
+}
+
+.landingProduct .productSheetFaqPanel p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.landingProduct .productSheetLegal {
+  padding-bottom: 16px;
+}
+
+.landingProduct .productSheetLegal p {
+  margin: 0 0 4px;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+
+.landingProduct .productSheetLegal p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 600px) {
+  .landingProduct .productSheetIncludesList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 14px;
+  }
+}
+
 /* Home — conversion layout aligned with product landing */
 .landingHome {
   padding-bottom: 0;

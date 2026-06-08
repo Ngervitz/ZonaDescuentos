@@ -61,6 +61,28 @@ export const products = [
       "Stock sujeto a disponibilidad",
       "Imágenes ilustrativas",
     ],
+    faqs: [
+      {
+        question: "¿Qué incluye la compra del sommier?",
+        answer:
+          "Incluye sommier, colchón de 2 plazas, seguro Sancor por 12 meses y coordinación de entrega. Si calificás, también accedés a tarjeta Cabal y sus beneficios.",
+      },
+      {
+        question: "¿Necesito tarjeta de crédito para comprar?",
+        answer:
+          "No. Podés solicitar tu primera compra sin contar con tarjeta previa. La aprobación depende de la evaluación crediticia.",
+      },
+      {
+        question: "¿Cómo funciona el seguro incluido?",
+        answer:
+          "Tu compra incluye protección Sancor durante 12 meses sin costo adicional, según las condiciones de la cobertura.",
+      },
+      {
+        question: "¿Cuándo se coordina la entrega?",
+        answer:
+          "Una vez aprobada tu solicitud, nos contactamos para acordar fecha y lugar de entrega según tu zona.",
+      },
+    ],
     extras: [
       { id: "flete", label: "Flete incluido", icon: "Truck" },
     ],
@@ -118,6 +140,28 @@ export const products = [
       "Modelo sujeto a disponibilidad",
       "Imágenes ilustrativas",
     ],
+    faqs: [
+      {
+        question: "¿Para qué está pensada esta notebook?",
+        answer:
+          "Es ideal para estudiar, trabajar y resolver tareas del día a día con una herramienta confiable y práctica.",
+      },
+      {
+        question: "¿La notebook viene con seguro?",
+        answer:
+          "Sí. Incluye seguro Sancor por 12 meses sin costo extra al aprobarse tu solicitud.",
+      },
+      {
+        question: "¿Puedo pagar en cuotas sin tarjeta?",
+        answer:
+          "Sí. Podés solicitar hasta 12 cuotas sin necesidad de contar con tarjeta de crédito previa.",
+      },
+      {
+        question: "¿Cómo recibo el producto?",
+        answer:
+          "Coordinamos la entrega después de aprobar tu solicitud, acordando fecha y lugar contigo.",
+      },
+    ],
     seoTitle: "Notebook Lenovo en cuotas | Zona Descuentos",
     seoDescription:
       "Notebook Lenovo para estudiar y trabajar, en hasta 12 cuotas sin tarjeta previa.",
@@ -168,6 +212,28 @@ export const products = [
       "Pulgadas sujetas a disponibilidad",
       "Imágenes ilustrativas",
     ],
+    faqs: [
+      {
+        question: "¿Qué tipo de TV es?",
+        answer:
+          "Es una Smart TV pensada para disfrutar series, películas, deportes y streaming desde tu hogar.",
+      },
+      {
+        question: "¿Incluye seguro?",
+        answer:
+          "Sí. Tu compra incluye protección Sancor por 12 meses sin costo adicional.",
+      },
+      {
+        question: "¿Cuántas cuotas puedo solicitar?",
+        answer:
+          "Podés solicitar hasta 12 cuotas. El monto de cuota y PTF se confirman al finalizar la solicitud.",
+      },
+      {
+        question: "¿La entrega está incluida?",
+        answer:
+          "Coordinamos la entrega una vez aprobada tu solicitud. Nos contactamos para acordar fecha y lugar.",
+      },
+    ],
     seoTitle: "Smart TV en cuotas | Zona Descuentos",
     seoDescription:
       "Smart TV para tu hogar en hasta 12 cuotas, sin tarjeta y con seguro incluido.",
@@ -206,6 +272,9 @@ export function normalizeProduct(product) {
       : [],
     includes: Array.isArray(product.includes) ? product.includes.filter(Boolean) : [],
     conditions: Array.isArray(product.conditions) ? product.conditions.filter(Boolean) : [],
+    faqs: Array.isArray(product.faqs)
+      ? product.faqs.filter((faq) => faq?.question && faq?.answer)
+      : [],
     insuranceIncluded: product.insuranceIncluded === true,
     image: mainImage,
     shortName: product.subtitle ?? "",
