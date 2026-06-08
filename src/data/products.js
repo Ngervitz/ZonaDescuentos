@@ -52,7 +52,7 @@ export const products = [
       { label: "Sin tarjeta", variant: "navy" },
     ],
     flags: { showCabal: true },
-    insuranceIncluded: false,
+    insuranceIncluded: true,
   },
   {
     slug: "sillon-esquinero-3-cuerpos",
@@ -78,7 +78,7 @@ export const products = [
       { label: "Sin tarjeta", variant: "navy" },
     ],
     flags: { showCabal: true },
-    insuranceIncluded: false,
+    insuranceIncluded: true,
   },
 ];
 

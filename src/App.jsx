@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Link, Navigate, Route, Routes, useParams } from "react-router-dom";
 import {
   ArrowRight,
+  BadgeCheck,
   Calendar,
   CreditCard,
-  IdCard,
   Lock,
   Package,
   ShieldCheck,
@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Wizard from "./components/wizard/Wizard";
 import BenefitsPage from "./pages/BenefitsPage";
-import { BrandLogo } from "./components/layout/LandingChrome";
+import { SiteFooter, SiteHeader } from "./components/layout/LandingChrome";
 import { getActiveProducts, getMainProduct, getProductBySlug } from "./data/products";
 import { track } from "./services/tracking";
 
@@ -26,7 +26,7 @@ const FLOW_STEPS = [
     text: "Seleccioná lo que querés y comenzá tu solicitud.",
   },
   {
-    icon: IdCard,
+    icon: BadgeCheck,
     title: "Verificamos si calificás",
     text: "Completá tus datos y te damos respuesta.",
   },
@@ -41,13 +41,6 @@ const FLOW_STEPS = [
     text: "La recibís en tu casa, pagás tus cuotas y accedés a los beneficios de Cabal.",
     link: { href: "/beneficios", label: "Conocé todos los beneficios →" },
   },
-];
-
-const PRODUCT_BULLETS = [
-  { icon: ShieldCheck, title: "Primera compra sin tarjeta", text: "Comprá hoy y pagá después." },
-  { icon: Calendar, title: "Hasta 12 cuotas", text: "Financiación accesible en tu compra." },
-  { icon: Truck, title: "Recibí tu compra", text: "Coordinamos la entrega si calificás." },
-  { icon: CreditCard, title: "Tarjeta Cabal", text: "Accedé a beneficios con tu tarjeta." },
 ];
 
 function formatPrice(amount) {
@@ -81,36 +74,6 @@ function NotFoundPage() {
       </section>
       <SiteFooter />
     </main>
-  );
-}
-
-function SiteHeader() {
-  return (
-    <header className="siteHeader">
-      <BrandLogo />
-      <div className="siteHeaderRight">
-        <Link to="/beneficios" className="siteNavLink">
-          Beneficios
-        </Link>
-        <span className="siteHeaderBacking">Con el respaldo de</span>
-        <span className="cabalBrand">Cabal</span>
-      </div>
-    </header>
-  );
-}
-
-function SiteFooter() {
-  return (
-    <footer className="siteFooter">
-      <BrandLogo />
-      <div className="siteFooterRight">
-        <Link to="/beneficios" className="siteNavLink">
-          Beneficios
-        </Link>
-        <span className="siteHeaderBacking">Con el respaldo de</span>
-        <span className="cabalBrand">Cabal</span>
-      </div>
-    </footer>
   );
 }
 
@@ -172,12 +135,11 @@ function HowItWorksSection() {
               </article>
               {index < FLOW_STEPS.length - 1 && (
                 <div className="flowArrow" aria-hidden="true">
-                  <svg width="32" height="12" viewBox="0 0 32 12" fill="none">
+                  <svg width="24" height="12" viewBox="0 0 24 12" fill="none">
                     <path
-                      d="M0 6h24M24 6l-3-3M24 6l-3 3"
+                      d="M0 6h16M16 6l-3-3M16 6l-3 3"
                       stroke="currentColor"
                       strokeWidth="1.5"
-                      strokeDasharray="3 3"
                       strokeLinecap="round"
                     />
                   </svg>
@@ -212,27 +174,13 @@ function SancorBrand() {
 function InsuranceBadge() {
   return (
     <div className="insuranceBadge">
-      <ShieldCheck size={16} strokeWidth={2.2} aria-hidden="true" />
-      <span>Seguro incluido por 12 meses</span>
-      <SancorBrand />
+      <ShieldCheck size={18} strokeWidth={2.2} aria-hidden="true" className="insuranceBadgeIcon" />
+      <div className="insuranceBadgeCopy">
+        <p className="insuranceBadgeTitle">Seguro incluido por 12 meses</p>
+        <SancorBrand />
+        <p className="insuranceBadgeSub">Protección adicional incluida en tu compra.</p>
+      </div>
     </div>
-  );
-}
-
-function InsuranceDetailBlock() {
-  return (
-    <section className="insuranceDetailBlock">
-      <h3>Seguro incluido</h3>
-      <p>
-        Este producto incluye seguro asociado a Sancor Seguros. Las coberturas y
-        condiciones aplican según los términos de la póliza.
-      </p>
-      <ul className="insuranceDetailList">
-        <li>Protección adicional incluida en la compra</li>
-        <li>Asociado a Sancor Seguros</li>
-        <li>Detalles sujetos a condiciones de póliza</li>
-      </ul>
-    </section>
   );
 }
 
@@ -260,22 +208,6 @@ function ProductCard({ product, onOpenWizard }) {
           <span className="productCardSubtitle">{product.shortName}</span>
         </h2>
         <p className="productCardDesc">{product.description}</p>
-        <ul className="productCardBullets">
-          {PRODUCT_BULLETS.map((item) => {
-            const Icon = item.icon;
-            return (
-              <li key={item.title}>
-                <span className="productCardBulletIcon">
-                  <Icon size={16} strokeWidth={2.2} />
-                </span>
-                <span>
-                  <strong>{item.title}.</strong> {item.text}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-        {product.insuranceIncluded && <InsuranceDetailBlock />}
       </div>
 
       <div className="productCardOffer">
@@ -287,7 +219,7 @@ function ProductCard({ product, onOpenWizard }) {
             PTF total: <span>{formatPrice(finalPrice)}</span>
           </p>
         </div>
-        {product.insuranceIncluded && <InsuranceBadge />}
+        <InsuranceBadge />
         <YellowButton onClick={() => onOpenWizard(product)} fullWidth>
           Ver si califico
         </YellowButton>
