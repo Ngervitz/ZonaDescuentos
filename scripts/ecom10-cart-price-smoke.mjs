@@ -29,11 +29,11 @@ if (stored.length !== 1 || stored[0].qty !== 2) {
   process.exit(1);
 }
 
-const before = normalizeProduct({ ...raw }).directPriceGross;
-const bumped = { ...raw, directPriceGross: before + 500 };
-const after = normalizeProduct(bumped).directPriceGross;
+const before = normalizeProduct({ ...raw }).priceUsd;
+const bumped = { ...raw, priceUsd: before + 50 };
+const after = normalizeProduct(bumped).priceUsd;
 
-if (after !== before + 500 || stored[0].productId !== raw.id) {
+if (after !== before + 50 || stored[0].productId !== raw.id) {
   console.error("FAIL", { before, after, stored });
   process.exit(1);
 }
