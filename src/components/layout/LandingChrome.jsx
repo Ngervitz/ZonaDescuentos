@@ -43,11 +43,48 @@ export function SiteHeader() {
   );
 }
 
+const FOOTER_POLICY_ITEMS = [
+  "Términos y condiciones",
+  "Cambios y devoluciones",
+  "Garantía de mejor precio",
+  "Política de privacidad",
+];
+
 export function SiteFooter() {
   return (
-    <footer className="siteFooter storeFooter nbFooter">
-      <BrandLogo />
-      <p className="storeFooterNote">Precios ilustrativos · demostración · noindex</p>
+    <footer className="siteFooter storeFooter nbFooter zdFooter">
+      <div className="zdFooterGrid">
+        <div className="zdFooterBrandBlock">
+          <BrandLogo />
+          <p className="zdFooterTagline">
+            Tecnología y oportunidades a precios especiales
+          </p>
+        </div>
+
+        <div className="zdFooterBlock">
+          <h2 className="zdFooterHeading">Contacto</h2>
+          <p className="zdFooterCopy">
+            Datos de contacto comercial — pendientes de confirmación.
+          </p>
+        </div>
+
+        <nav className="zdFooterBlock" aria-label="Información legal y comercial">
+          <h2 className="zdFooterHeading">Información</h2>
+          <ul className="zdFooterList">
+            {FOOTER_POLICY_ITEMS.map((label) => (
+              <li key={label}>
+                <span className="zdFooterSoon" title="Contenido en preparación">
+                  {label} — <em>Próximamente</em>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <p className="zdFooterMeta">
+        Precios ilustrativos · demostración · noindex
+      </p>
     </footer>
   );
 }
