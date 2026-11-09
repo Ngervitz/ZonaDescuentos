@@ -3,20 +3,24 @@ import {
   getProductDisplaySubtitle,
   getProductDisplayTitle,
 } from "../../utils/productDisplay";
+import { wizardIntegrationEnabled } from "../../config/commerceFlags";
 import ProductGallery from "./ProductGallery";
 import ProductOfferBox from "./ProductOfferBox";
 import DirectPurchasePanel from "./DirectPurchasePanel";
+import FinancingPlaceholder from "./FinancingPlaceholder";
 
 export default function ProductHero({ product, onOpenWizard, linkToProduct = false }) {
   const title = getProductDisplayTitle(product);
   const subtitle = getProductDisplaySubtitle(product);
   const productPath = `/producto/${product.slug}`;
+  const showWizardOffer =
+    wizardIntegrationEnabled && product.supportsWizard && typeof onOpenWizard === "function";
 
   return (
-    <section className="productHero productHeroConversion">
+    <section className="productHero productHeroStore">
       {product.isTestProduct && (
         <p className="productHeroDemoBanner" role="status">
-          Producto de demostración — precio ilustrativo, sin compra real
+          Producto de demostración — precio ilustrativo
         </p>
       )}
       <div className="productHeroGrid">
@@ -35,7 +39,10 @@ export default function ProductHero({ product, onOpenWizard, linkToProduct = fal
             )}
             {subtitle && <p className="productHeroSubtitle">{subtitle}</p>}
           </div>
-          {product.supportsWizard && (
+          {product.longDescription && (
+            <p className="productHeroLead">{product.longDescription}</p>
+          )}
+          {showWizardOffer && (
             <ProductOfferBox
               product={product}
               onOpenWizard={onOpenWizard}
@@ -43,6 +50,7 @@ export default function ProductHero({ product, onOpenWizard, linkToProduct = fal
             />
           )}
           <DirectPurchasePanel product={product} />
+          <FinancingPlaceholder product={product} />
         </div>
       </div>
     </section>

@@ -1,21 +1,6 @@
 import { Link } from "react-router-dom";
-import { directPurchaseEnabled } from "../../config/commerceFlags";
+import { storeEnabled } from "../../config/commerceFlags";
 import { useCart } from "../../context/CartContext";
-
-const CREDIZONA_LOGO =
-  import.meta.env.VITE_CREDIZONA_LOGO_URL || "/credizona-logo.svg";
-
-function CredizonaLogo() {
-  return (
-    <img
-      src={CREDIZONA_LOGO}
-      alt="credizona"
-      className="credizonaLogo"
-      loading="lazy"
-      decoding="async"
-    />
-  );
-}
 
 export function BrandLogo() {
   return (
@@ -32,9 +17,7 @@ export function BrandLogo() {
             <span className="brandLogoZona">Zona</span>{" "}
             <span className="brandLogoDesc">Descuentos</span>
           </p>
-          <span className="brandLogoSub">
-            de <CredizonaLogo />
-          </span>
+          <span className="brandLogoSub storeBrandSub">Tienda online</span>
         </div>
       </div>
     </Link>
@@ -45,10 +28,10 @@ export function SiteHeader() {
   const { itemCount: cartCount } = useCart();
 
   return (
-    <header className="siteHeader">
+    <header className="siteHeader storeHeader">
       <BrandLogo />
-      <div className="siteHeaderRight">
-        {directPurchaseEnabled && (
+      <nav className="siteHeaderRight storeNav" aria-label="Principal">
+        {storeEnabled && (
           <>
             <Link to="/tienda" className="siteNavLink">
               Tienda
@@ -58,27 +41,18 @@ export function SiteHeader() {
             </Link>
           </>
         )}
-        <Link to="/beneficios" className="siteNavLink">
-          Beneficios
-        </Link>
-        <span className="siteHeaderBacking">Con el respaldo de</span>
-        <span className="cabalBrand">Cabal</span>
-      </div>
+      </nav>
     </header>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer className="siteFooter">
+    <footer className="siteFooter storeFooter">
       <BrandLogo />
-      <div className="siteFooterRight">
-        <Link to="/beneficios" className="siteNavLink">
-          Beneficios
-        </Link>
-        <span className="siteHeaderBacking">Con el respaldo de</span>
-        <span className="cabalBrand">Cabal</span>
-      </div>
+      <p className="storeFooterNote">
+        Tienda demostrativa · precios ilustrativos · checkout próximamente
+      </p>
     </footer>
   );
 }

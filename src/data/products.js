@@ -53,6 +53,7 @@ export function normalizeProduct(product) {
     shortName: product.subtitle ?? "",
     description: product.shortDescription ?? "",
     isActive: product.status === "active",
+    financingEligible: product.financingEligible === true,
     isOperable: product.status === "active" && purchaseModes.includes("wizard"),
     isVisible: product.status === "active" || product.status === "coming_soon",
     priceMonthly,

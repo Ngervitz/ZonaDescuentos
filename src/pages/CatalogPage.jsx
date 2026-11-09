@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SiteFooter, SiteHeader } from "../components/layout/LandingChrome";
 import ProductImage from "../components/ui/ProductImage";
 import usePageSeo from "../hooks/usePageSeo";
-import { directPurchaseEnabled } from "../config/commerceFlags";
+import { storeEnabled } from "../config/commerceFlags";
 import { formatProductPrice } from "../data/products";
 import {
   getProductsSync,
@@ -26,7 +26,7 @@ export default function CatalogPage() {
 
   const title = category ? `Tienda — ${category}` : "Todos los productos";
 
-  if (!directPurchaseEnabled) {
+  if (!storeEnabled) {
     return null;
   }
 

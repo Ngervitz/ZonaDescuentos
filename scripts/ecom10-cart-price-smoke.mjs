@@ -2,7 +2,7 @@
  * Smoke: localStorage solo { productId, qty }; el precio se lee del catálogo al normalizar.
  * Run: node scripts/ecom10-cart-price-smoke.mjs
  */
-import { demoProducts } from "../src/data/products.demo.js";
+import { catalogProducts } from "../src/data/products.catalog.js";
 import { normalizeProduct } from "../src/data/products.js";
 import { writeCartLines, readCartLines } from "../src/utils/cartStorage.js";
 
@@ -16,7 +16,7 @@ globalThis.localStorage = {
   },
 };
 
-const raw = demoProducts.find((p) => p.slug === "demo-iphone-15");
+const raw = catalogProducts.find((p) => p.slug === "demo-iphone-15");
 if (!raw) {
   console.error("FAIL: demo-iphone-15 not in catalog");
   process.exit(1);

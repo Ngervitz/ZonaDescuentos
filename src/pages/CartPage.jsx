@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { SiteFooter, SiteHeader } from "../components/layout/LandingChrome";
 import usePageSeo from "../hooks/usePageSeo";
-import { directPurchaseEnabled } from "../config/commerceFlags";
+import { storeEnabled } from "../config/commerceFlags";
 import { formatProductPrice } from "../data/products";
 import { useCart } from "../context/CartContext";
 
@@ -17,7 +17,7 @@ export default function CartPage() {
     noindex: true,
   });
 
-  if (!directPurchaseEnabled) {
+  if (!storeEnabled) {
     return null;
   }
 

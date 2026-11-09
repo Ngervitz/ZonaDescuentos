@@ -1,252 +1,101 @@
-import { useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  CreditCard,
-  Gift,
-  ShieldCheck,
-  Wallet,
-} from "lucide-react";
-import Wizard from "../components/wizard/Wizard";
 import { SiteFooter, SiteHeader } from "../components/layout/LandingChrome";
-import HowItWorksSection from "../components/sections/HowItWorksSection";
-import ProductHero from "../components/product/ProductHero";
-import ProductNotFoundPage from "./ProductNotFoundPage";
+import ProductImage from "../components/ui/ProductImage";
 import usePageSeo from "../hooks/usePageSeo";
-import { useWizardLauncher } from "../hooks/useWizardLauncher";
-import { buildProductContext, ENTRY_PATH } from "../utils/applicationFlow";
 import { formatProductPrice } from "../data/products";
 import { SITE_SEO } from "../utils/seo";
-import { directPurchaseEnabled } from "../config/commerceFlags";
-import {
-  getFeaturedProductSync,
-  getProductsSync,
-} from "../services/productCatalog";
-import { track } from "../services/tracking";
-import ProductImage from "../components/ui/ProductImage";
-import YellowButton from "../components/ui/YellowButton";
-
-const HOME_PROMO_ITEMS = [
-  { emoji: "⚡", text: "Primera compra sin tarjeta" },
-  { emoji: "🛡", text: "Seguro incluido" },
-  { emoji: "📦", text: "Entrega coordinada" },
-  { emoji: "💳", text: "Tarjeta Cabal con beneficios" },
-];
-
-const HOME_WHY_CARDS = [
-  {
-    icon: Wallet,
-    title: "Sin tarjeta previa",
-    copy: "Tu primera compra puede ser hoy.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Seguro incluido",
-    copy: "Protección Sancor por 12 meses sin costo extra.",
-  },
-  {
-    icon: CreditCard,
-    title: "Tarjeta Cabal",
-    copy: "Si calificás, recibés tu tarjeta y accedés a beneficios.",
-  },
-  {
-    icon: Gift,
-    title: "Futuras oportunidades",
-    copy: "Más productos, más cuotas, más beneficios.",
-  },
-];
-
-function HomePromoBar() {
-  return (
-    <div className="promoBar productPagePromoBar" aria-label="Beneficios de compra">
-      {HOME_PROMO_ITEMS.map((item) => (
-        <div className="promoItem productPagePromoItem" key={item.text}>
-          <span className="productPagePromoEmoji" aria-hidden="true">
-            {item.emoji}
-          </span>
-          <span>{item.text}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function HomeStoreTeaser() {
-  if (!directPurchaseEnabled) return null;
-
-  return (
-    <section className="homeStoreTeaser">
-      <div className="homeStoreTeaserInner">
-        <h2>Explorá la tienda demo</h2>
-        <p>
-          Productos de demostración para probar catálogo y carrito. Las landings con financiación
-          Cabal siguen igual.
-        </p>
-        <Link to="/tienda" className="homeStoreTeaserLink">
-          Ir al catálogo
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-function HomeOtherProducts({ products, onOpenWizard }) {
-  if (!products.length) return null;
-
-  return (
-    <section className="relatedProducts relatedProductsConversion homeOtherProducts">
-      <h2>Más productos disponibles</h2>
-      <div className="relatedProductsGrid">
-        {products.map((product) => (
-          <article className="relatedCardLarge" key={product.slug}>
-            <Link
-              to={`/producto/${product.slug}`}
-              className="relatedCardLargeMedia relatedCardLargeMediaLink"
-            >
-              <ProductImage
-                src={product.mainImage}
-                product={product}
-                alt={product.name}
-                className="relatedCardLargeImage"
-              />
-            </Link>
-            <div className="relatedCardLargeBody">
-              <h3>
-                <Link to={`/producto/${product.slug}`} className="relatedCardLargeTitleLink">
-                  {product.name}
-                </Link>
-              </h3>
-              {product.priceMonthly > 0 && (
-                <div className="relatedCardLargePrice">
-                  <span className="relatedCardLargePriceLabel">
-                    {product.installments} cuotas desde
-                  </span>
-                  <strong className="relatedCardLargePriceAmount">
-                    {formatProductPrice(product.priceMonthly)}
-                  </strong>
-                </div>
-              )}
-              <div className="relatedCardLargeCtas">
-                {product.isOperable && (
-                  <YellowButton
-                    onClick={() =>
-                      onOpenWizard(
-                        product,
-                        buildProductContext(product, ENTRY_PATH.PRODUCT_CARD)
-                      )
-                    }
-                    fullWidth
-                  >
-                    Ver si califico
-                  </YellowButton>
-                )}
-                <Link to={`/producto/${product.slug}`} className="relatedCardLargeLink">
-                  Ver detalles
-                </Link>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function HomeWhySection() {
-  return (
-    <section className="homeWhyBlock">
-      <h2>Más que una compra en cuotas</h2>
-      <div className="homeWhyGrid">
-        {HOME_WHY_CARDS.map((card) => {
-          const Icon = card.icon;
-          return (
-            <article className="homeWhyCard" key={card.title}>
-              <span className="homeWhyCardIcon">
-                <Icon size={28} strokeWidth={2} />
-              </span>
-              <h3>{card.title}</h3>
-              <p>{card.copy}</p>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function HomeFinalCta({ product, onOpenWizard }) {
-  if (!product?.isOperable) return null;
-
-  return (
-    <section className="productFinalCta homeFinalCta">
-      <div className="productFinalCtaInner">
-        <h2>¿Listo para empezar?</h2>
-        <p>Elegí tu producto y verificá si calificás en minutos.</p>
-        <YellowButton
-          onClick={() =>
-            onOpenWizard(
-              product,
-              buildProductContext(product, ENTRY_PATH.HOME_FEATURED_PRODUCT)
-            )
-          }
-          fullWidth
-        >
-          Ver si califico
-        </YellowButton>
-      </div>
-    </section>
-  );
-}
+import { getFeaturedProductSync, getProductsSync } from "../services/productCatalog";
 
 export default function HomePage() {
-  const { featuredProduct, otherProducts } = useMemo(() => {
-    const featured = getFeaturedProductSync();
-    const all = getProductsSync();
-    const others = featured
-      ? all.filter(
-          (product) =>
-            product.status === "active" &&
-            product.supportsWizard &&
-            product.slug !== featured.slug,
-        )
-      : [];
-    return { featuredProduct: featured, otherProducts: others };
-  }, []);
+  const featured = getFeaturedProductSync();
+  const products = getProductsSync();
 
-  const { wizardProduct, wizardContext, openWizard, closeWizard } = useWizardLauncher();
-
-  usePageSeo(SITE_SEO);
-
-  useEffect(() => {
-    track("home_view", {});
-  }, []);
-
-  if (!featuredProduct) {
-    return <ProductNotFoundPage />;
-  }
+  usePageSeo({
+    ...SITE_SEO,
+    title: "Tienda | Zona Descuentos",
+    description: SITE_SEO.description,
+  });
 
   return (
-    <main className="landing landingHome landingProduct">
+    <main className="landing storeHome">
       <SiteHeader />
-      <HomePromoBar />
-      <HowItWorksSection compact top />
-      <ProductHero
-        product={featuredProduct}
-        onOpenWizard={openWizard}
-        linkToProduct
-      />
-      <HomeOtherProducts products={otherProducts} onOpenWizard={openWizard} />
-      <HomeStoreTeaser />
-      <HomeWhySection />
-      <HomeFinalCta product={featuredProduct} onOpenWizard={openWizard} />
-      <SiteFooter />
+      <section className="storeHero">
+        <h1>Zona Descuentos</h1>
+        <p className="storeHeroLead">
+          Tienda en construcción. Explorá productos de demostración, probá el carrito y conocé
+          las fichas que usaremos con catálogo real.
+        </p>
+        <Link to="/tienda" className="storeHeroCta">
+          Ver todos los productos
+        </Link>
+      </section>
 
-      {wizardProduct && (
-        <Wizard
-          product={wizardProduct}
-          productContext={wizardContext}
-          onClose={closeWizard}
-        />
+      {featured && (
+        <section className="storeFeatured">
+          <h2>Destacado</h2>
+          <article className="storeFeaturedCard">
+            <Link to={`/producto/${featured.slug}`} className="storeFeaturedMedia">
+              <ProductImage
+                src={featured.mainImage}
+                product={featured}
+                alt={featured.name}
+                className="storeFeaturedImage"
+              />
+            </Link>
+            <div className="storeFeaturedBody">
+              <p className="storeFeaturedCategory">{featured.category}</p>
+              <h3>
+                <Link to={`/producto/${featured.slug}`}>{featured.name}</Link>
+              </h3>
+              <p className="storeFeaturedPrice">
+                {featured.directPriceGross != null && (
+                  <>Precio ilustrativo {formatProductPrice(featured.directPriceGross)}</>
+                )}
+              </p>
+              <Link to={`/producto/${featured.slug}`} className="storeCardLink">
+                Ver ficha
+              </Link>
+            </div>
+          </article>
+        </section>
       )}
+
+      <section className="storeGridSection">
+        <h2>Productos</h2>
+        <div className="catalogGrid storeHomeGrid">
+          {products.map((product) => (
+            <article className="catalogCard" key={product.id}>
+              {product.isTestProduct && (
+                <span className="catalogDemoBadge">Producto de demostración</span>
+              )}
+              <Link to={`/producto/${product.slug}`} className="catalogCardMedia">
+                <ProductImage
+                  src={product.mainImage}
+                  product={product}
+                  alt={product.name}
+                  className="catalogCardImage"
+                />
+              </Link>
+              <div className="catalogCardBody">
+                <p className="catalogCardCategory">{product.category}</p>
+                <h3>
+                  <Link to={`/producto/${product.slug}`}>{product.name}</Link>
+                </h3>
+                {product.directPriceGross != null && (
+                  <p className="catalogCardPriceDirect">
+                    Precio ilustrativo{" "}
+                    <strong>{formatProductPrice(product.directPriceGross)}</strong>
+                  </p>
+                )}
+                <Link to={`/producto/${product.slug}`} className="catalogCardLink">
+                  Ver producto
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <SiteFooter />
     </main>
   );
 }

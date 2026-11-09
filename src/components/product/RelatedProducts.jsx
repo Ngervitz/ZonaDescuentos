@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import { formatProductPrice } from "../../data/products";
-import { buildProductContext, ENTRY_PATH } from "../../utils/applicationFlow";
 import ProductImage from "../ui/ProductImage";
-import YellowButton from "../ui/YellowButton";
 
-export default function RelatedProducts({ products, onOpenWizard }) {
+export default function RelatedProducts({ products }) {
   if (!products.length) return null;
 
   return (
-    <section className="relatedProducts relatedProductsConversion">
+    <section className="relatedProducts storeRelated">
       <h2>También te puede interesar</h2>
       <div className="relatedProductsGrid">
         {products.map((product) => (
@@ -30,17 +28,7 @@ export default function RelatedProducts({ products, onOpenWizard }) {
                   {product.name}
                 </Link>
               </h3>
-              {product.supportsWizard && product.priceMonthly > 0 && (
-                <div className="relatedCardLargePrice">
-                  <span className="relatedCardLargePriceLabel">
-                    {product.installments} cuotas desde
-                  </span>
-                  <strong className="relatedCardLargePriceAmount">
-                    {formatProductPrice(product.priceMonthly)}
-                  </strong>
-                </div>
-              )}
-              {product.supportsDirect && product.directPriceGross != null && (
+              {product.directPriceGross != null && (
                 <div className="relatedCardLargePrice relatedCardLargePriceDirect">
                   <span className="relatedCardLargePriceLabel">Precio ilustrativo</span>
                   <strong className="relatedCardLargePriceAmount">
@@ -48,24 +36,9 @@ export default function RelatedProducts({ products, onOpenWizard }) {
                   </strong>
                 </div>
               )}
-              <div className="relatedCardLargeCtas">
-                {product.isOperable && (
-                  <YellowButton
-                    onClick={() =>
-                      onOpenWizard(
-                        product,
-                        buildProductContext(product, ENTRY_PATH.PRODUCT_LANDING)
-                      )
-                    }
-                    fullWidth
-                  >
-                    Ver si califico
-                  </YellowButton>
-                )}
-                <Link to={`/producto/${product.slug}`} className="relatedCardLargeLink">
-                  Ver detalles
-                </Link>
-              </div>
+              <Link to={`/producto/${product.slug}`} className="relatedCardLargeLink">
+                Ver producto
+              </Link>
             </div>
           </article>
         ))}

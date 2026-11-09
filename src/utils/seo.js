@@ -1,18 +1,12 @@
 export const SITE_SEO = {
-  title: "Zona Descuentos | de credizona",
+  title: "Zona Descuentos — Tienda",
   description:
-    "Tu primera compra sin tarjeta. Hasta 12 cuotas. Recibís tu compra y accedés a beneficios con Cabal.",
-};
-
-export const BENEFITS_SEO = {
-  title: "Beneficios Cabal | Zona Descuentos",
-  description:
-    "Conocé los beneficios Cabal disponibles para clientes de Zona Descuentos de credizona.",
+    "Catálogo y carrito demostrativo de Zona Descuentos. Precios ilustrativos; compras próximamente.",
 };
 
 export const NOT_FOUND_SEO = {
-  title: "Producto no encontrado | Zona Descuentos",
-  description: "El producto que buscás ya no está disponible en Zona Descuentos.",
+  title: "No encontrado | Zona Descuentos",
+  description: "El producto o la página que buscás no está disponible.",
 };
 
 export function getProductSeo(product) {
@@ -52,9 +46,6 @@ function setRobotsMeta(noindex) {
   }
 }
 
-/**
- * Lightweight head manager — no external SEO library.
- */
 export function applyPageSeo({ title, description, noindex = false } = SITE_SEO) {
   if (title) {
     document.title = title;

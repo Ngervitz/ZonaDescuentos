@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { directPurchaseEnabled } from "./config/commerceFlags";
-import BenefitsPage from "./pages/BenefitsPage";
+import { storeEnabled } from "./config/commerceFlags";
 import CatalogPage from "./pages/CatalogPage";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
@@ -12,9 +11,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/beneficios" element={<BenefitsPage />} />
         <Route path="/producto/:slug" element={<ProductPage />} />
-        {directPurchaseEnabled && (
+        {storeEnabled && (
           <>
             <Route path="/tienda" element={<CatalogPage />} />
             <Route path="/carrito" element={<CartPage />} />

@@ -1,5 +1,4 @@
 import { catalogProducts, MAIN_PRODUCT_SLUG } from "../data/products.catalog.js";
-import { demoProducts } from "../data/products.demo.js";
 import { normalizeProduct } from "../data/products.js";
 
 /**
@@ -11,8 +10,7 @@ import { normalizeProduct } from "../data/products.js";
 let normalizedCatalog = null;
 
 function buildCatalog() {
-  const rows = [...catalogProducts, ...demoProducts];
-  return rows.map((row) => normalizeProduct(row)).filter(Boolean);
+  return catalogProducts.map((row) => normalizeProduct(row)).filter(Boolean);
 }
 
 function getCatalog() {
@@ -95,8 +93,8 @@ export async function getFeaturedProduct() {
 export function getFeaturedProductSync() {
   const all = listableProducts(getCatalog());
   const main =
-    all.find((p) => p.isMain && p.status === "active" && p.supportsWizard) ??
-    all.find((p) => p.status === "active" && p.supportsWizard);
+    all.find((p) => p.isMain && p.status === "active") ??
+    all.find((p) => p.status === "active");
   return main ?? null;
 }
 
@@ -104,13 +102,9 @@ export async function listRelatedProducts(slug, limit = 2) {
   return listRelatedProductsSync(slug, limit);
 }
 
-export function listRelatedProductsSync(slug, limit = 2) {
-  const source = getProductSync(slug);
+export function listRelatedProductsSync(slug, limit = 4) {
   const all = getProductsSync();
-  if (source?.isTestProduct) {
-    return all.filter((p) => p.slug !== slug).slice(0, limit);
-  }
-  return all.filter((p) => p.slug !== slug && p.supportsWizard).slice(0, limit);
+  return all.filter((p) => p.slug !== slug).slice(0, limit);
 }
 
 /** Compat: mismo que getProducts(). */
