@@ -3724,21 +3724,19 @@ img {
 
 @media (max-width: 767px) {
   .nbHeroBanner {
-    display: flex;
-    justify-content: center;
-    max-height: 330px;
+    width: 100%;
     background: #0b1a30;
   }
 
   .nbHeroPicture {
-    max-height: 330px;
+    width: 100%;
   }
 
   .nbHeroImg {
+    width: 100%;
     height: auto;
-    max-height: 330px;
-    object-fit: contain;
-    object-position: center top;
+    max-width: 100%;
+    vertical-align: top;
   }
 }
 
