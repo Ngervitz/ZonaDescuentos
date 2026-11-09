@@ -3376,3 +3376,222 @@ img {
 .landingProduct {
   overflow-x: hidden;
 }
+
+.pageLoadingHint {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--text-muted, #555);
+}
+
+.directPurchasePanel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px dashed var(--cabal, #009fe3);
+  border-radius: 12px;
+  background: #f8fcff;
+}
+
+.directPurchaseDemoBadge,
+.productHeroDemoBanner {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #92400e;
+  background: #fef3c7;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0 0.75rem;
+}
+
+.productHeroDemoBanner {
+  margin: 0 1rem 0.75rem;
+  max-width: 960px;
+}
+
+.directPurchaseLabel {
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.directPurchasePrice {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.directPurchaseHint {
+  font-size: 0.8rem;
+  color: #555;
+  margin: 0 0 0.75rem;
+}
+
+.catalogPage,
+.cartPage {
+  padding: 1.25rem 1rem 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.catalogFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.catalogChip {
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  background: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.catalogChip.isActive {
+  border-color: var(--cabal, #009fe3);
+  color: var(--cabal, #009fe3);
+  font-weight: 600;
+}
+
+.catalogGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.catalogCard {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
+}
+
+.catalogDemoBadge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.catalogIntro,
+.cartStoreNotice {
+  font-size: 0.95rem;
+  color: #333;
+  margin: 0.5rem 0 1rem;
+  line-height: 1.45;
+}
+
+.cartStoreNotice {
+  padding: 0.75rem 1rem;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 10px;
+}
+
+.cartLineDemoTag {
+  font-size: 0.75rem;
+  color: #92400e;
+  margin: 0.15rem 0;
+}
+
+.homeStoreTeaser {
+  padding: 1.25rem 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.homeStoreTeaserInner {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  background: #fafafa;
+}
+
+.homeStoreTeaserLink {
+  display: inline-block;
+  margin-top: 0.65rem;
+  font-weight: 700;
+  color: var(--cabal, #009fe3);
+}
+
+.productDemoLegalTitle {
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.catalogCardBody {
+  padding: 0.75rem 1rem 1rem;
+}
+
+.catalogCardCategory {
+  font-size: 0.75rem;
+  color: #666;
+  margin: 0 0 0.25rem;
+}
+
+.catalogCardPriceWizard,
+.catalogCardPriceDirect {
+  font-size: 0.85rem;
+  margin: 0.35rem 0;
+}
+
+.cartPageNote {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.cartLineList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+}
+
+.cartLine {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cartQtyInput {
+  width: 4rem;
+  margin-left: 0.35rem;
+}
+
+.cartRemoveBtn {
+  align-self: flex-start;
+  font-size: 0.85rem;
+  background: none;
+  border: none;
+  color: var(--cabal, #009fe3);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media (max-width: 360px) {
+  .catalogGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogPage h1,
+  .cartPage h1 {
+    font-size: 1.35rem;
+  }
+
+  .siteHeaderRight {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+}

@@ -20,18 +20,11 @@ export function getProductSeo(product) {
     title: product?.seoTitle || product?.name || SITE_SEO.title,
     description:
       product?.seoDescription || product?.shortDescription || SITE_SEO.description,
+    noindex: product?.isTestProduct === true,
   };
 }
 
-/**
- * Lightweight head manager — no external SEO library.
- * Updates document.title and meta description only.
- */
-export function applyPageSeo({ title, description }) {
-  if (title) {
-    document.title = title;
-  }
-
+function setMetaDescription(description) {
   if (!description) return;
 
   let meta = document.querySelector('meta[name="description"]');
@@ -41,4 +34,31 @@ export function applyPageSeo({ title, description }) {
     document.head.appendChild(meta);
   }
   meta.setAttribute("content", description);
+}
+
+function setRobotsMeta(noindex) {
+  let meta = document.querySelector('meta[name="robots"]');
+  if (noindex) {
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.setAttribute("name", "robots");
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute("content", "noindex, nofollow");
+    return;
+  }
+  if (meta) {
+    meta.remove();
+  }
+}
+
+/**
+ * Lightweight head manager — no external SEO library.
+ */
+export function applyPageSeo({ title, description, noindex = false } = SITE_SEO) {
+  if (title) {
+    document.title = title;
+  }
+  setMetaDescription(description);
+  setRobotsMeta(noindex);
 }

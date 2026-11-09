@@ -5,6 +5,7 @@ import {
 } from "../../utils/productDisplay";
 import ProductGallery from "./ProductGallery";
 import ProductOfferBox from "./ProductOfferBox";
+import DirectPurchasePanel from "./DirectPurchasePanel";
 
 export default function ProductHero({ product, onOpenWizard, linkToProduct = false }) {
   const title = getProductDisplayTitle(product);
@@ -13,6 +14,11 @@ export default function ProductHero({ product, onOpenWizard, linkToProduct = fal
 
   return (
     <section className="productHero productHeroConversion">
+      {product.isTestProduct && (
+        <p className="productHeroDemoBanner" role="status">
+          Producto de demostración — precio ilustrativo, sin compra real
+        </p>
+      )}
       <div className="productHeroGrid">
         <div className="productHeroMedia">
           <ProductGallery product={product} linkToProduct={linkToProduct} />
@@ -29,11 +35,14 @@ export default function ProductHero({ product, onOpenWizard, linkToProduct = fal
             )}
             {subtitle && <p className="productHeroSubtitle">{subtitle}</p>}
           </div>
-          <ProductOfferBox
-            product={product}
-            onOpenWizard={onOpenWizard}
-            variant="conversion"
-          />
+          {product.supportsWizard && (
+            <ProductOfferBox
+              product={product}
+              onOpenWizard={onOpenWizard}
+              variant="conversion"
+            />
+          )}
+          <DirectPurchasePanel product={product} />
         </div>
       </div>
     </section>

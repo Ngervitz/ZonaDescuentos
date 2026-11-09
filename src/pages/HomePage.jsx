@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   CreditCard,
@@ -16,9 +16,10 @@ import { useWizardLauncher } from "../hooks/useWizardLauncher";
 import { buildProductContext, ENTRY_PATH } from "../utils/applicationFlow";
 import { formatProductPrice } from "../data/products";
 import { SITE_SEO } from "../utils/seo";
+import { directPurchaseEnabled } from "../config/commerceFlags";
 import {
-  getFeaturedProduct,
-  listVisibleProducts,
+  getFeaturedProductSync,
+  getProductsSync,
 } from "../services/productCatalog";
 import { track } from "../services/tracking";
 import ProductImage from "../components/ui/ProductImage";
@@ -45,7 +46,7 @@ const HOME_WHY_CARDS = [
   {
     icon: CreditCard,
     title: "Tarjeta Cabal",
-    copy: "Si calificás, recibís tu tarjeta y accedés a beneficios.",
+    copy: "Si calificás, recibés tu tarjeta y accedés a beneficios.",
   },
   {
     icon: Gift,
@@ -66,6 +67,25 @@ function HomePromoBar() {
         </div>
       ))}
     </div>
+  );
+}
+
+function HomeStoreTeaser() {
+  if (!directPurchaseEnabled) return null;
+
+  return (
+    <section className="homeStoreTeaser">
+      <div className="homeStoreTeaserInner">
+        <h2>Explorá la tienda demo</h2>
+        <p>
+          Productos de demostración para probar catálogo y carrito. Las landings con financiación
+          Cabal siguen igual.
+        </p>
+        <Link to="/tienda" className="homeStoreTeaserLink">
+          Ir al catálogo
+        </Link>
+      </div>
+    </section>
   );
 }
 
@@ -178,14 +198,19 @@ function HomeFinalCta({ product, onOpenWizard }) {
 }
 
 export default function HomePage() {
-  const featuredProduct = getFeaturedProduct();
-  const otherProducts = useMemo(() => {
-    if (!featuredProduct) return [];
-    return listVisibleProducts().filter(
-      (product) =>
-        product.status === "active" && product.slug !== featuredProduct.slug
-    );
-  }, [featuredProduct]);
+  const { featuredProduct, otherProducts } = useMemo(() => {
+    const featured = getFeaturedProductSync();
+    const all = getProductsSync();
+    const others = featured
+      ? all.filter(
+          (product) =>
+            product.status === "active" &&
+            product.supportsWizard &&
+            product.slug !== featured.slug,
+        )
+      : [];
+    return { featuredProduct: featured, otherProducts: others };
+  }, []);
 
   const { wizardProduct, wizardContext, openWizard, closeWizard } = useWizardLauncher();
 
@@ -210,6 +235,7 @@ export default function HomePage() {
         linkToProduct
       />
       <HomeOtherProducts products={otherProducts} onOpenWizard={openWizard} />
+      <HomeStoreTeaser />
       <HomeWhySection />
       <HomeFinalCta product={featuredProduct} onOpenWizard={openWizard} />
       <SiteFooter />

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { applyPageSeo, SITE_SEO } from "../utils/seo";
 
-export default function usePageSeo({ title, description } = SITE_SEO) {
+export default function usePageSeo({ title, description, noindex = false } = SITE_SEO) {
   useEffect(() => {
-    applyPageSeo({ title, description });
+    applyPageSeo({ title, description, noindex });
 
     return () => {
       applyPageSeo(SITE_SEO);
     };
-  }, [title, description]);
+  }, [title, description, noindex]);
 }

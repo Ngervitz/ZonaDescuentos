@@ -30,13 +30,21 @@ export default function RelatedProducts({ products, onOpenWizard }) {
                   {product.name}
                 </Link>
               </h3>
-              {product.priceMonthly > 0 && (
+              {product.supportsWizard && product.priceMonthly > 0 && (
                 <div className="relatedCardLargePrice">
                   <span className="relatedCardLargePriceLabel">
                     {product.installments} cuotas desde
                   </span>
                   <strong className="relatedCardLargePriceAmount">
                     {formatProductPrice(product.priceMonthly)}
+                  </strong>
+                </div>
+              )}
+              {product.supportsDirect && product.directPriceGross != null && (
+                <div className="relatedCardLargePrice relatedCardLargePriceDirect">
+                  <span className="relatedCardLargePriceLabel">Precio ilustrativo</span>
+                  <strong className="relatedCardLargePriceAmount">
+                    {formatProductPrice(product.directPriceGross)}
                   </strong>
                 </div>
               )}

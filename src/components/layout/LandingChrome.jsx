@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { directPurchaseEnabled } from "../../config/commerceFlags";
+import { useCart } from "../../context/CartContext";
 
 const CREDIZONA_LOGO =
   import.meta.env.VITE_CREDIZONA_LOGO_URL || "/credizona-logo.svg";
@@ -40,10 +42,22 @@ export function BrandLogo() {
 }
 
 export function SiteHeader() {
+  const { itemCount: cartCount } = useCart();
+
   return (
     <header className="siteHeader">
       <BrandLogo />
       <div className="siteHeaderRight">
+        {directPurchaseEnabled && (
+          <>
+            <Link to="/tienda" className="siteNavLink">
+              Tienda
+            </Link>
+            <Link to="/carrito" className="siteNavLink siteCartLink">
+              Carrito{cartCount > 0 ? ` (${cartCount})` : ""}
+            </Link>
+          </>
+        )}
         <Link to="/beneficios" className="siteNavLink">
           Beneficios
         </Link>

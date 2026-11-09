@@ -12,7 +12,10 @@ import usePageSeo from "../hooks/usePageSeo";
 import { useWizardLauncher } from "../hooks/useWizardLauncher";
 import { buildProductContext, ENTRY_PATH } from "../utils/applicationFlow";
 import { getProductSeo } from "../utils/seo";
-import { getProduct, listRelatedProducts } from "../services/productCatalog";
+import {
+  getProductSync,
+  listRelatedProductsSync,
+} from "../services/productCatalog";
 import { track } from "../services/tracking";
 import YellowButton from "../components/ui/YellowButton";
 
@@ -35,6 +38,12 @@ const LEGAL_LINES = [
   "PTF informado al finalizar la solicitud.",
 ];
 
+const DEMO_NOTICE_LINES = [
+  "Producto de demostración con precio ilustrativo.",
+  "No incluye seguro, cuotas Cabal ni solicitud crediticia.",
+  "No se realiza compra ni cobro desde esta web en esta etapa.",
+];
+
 function ProductPagePromoBar() {
   return (
     <div
@@ -50,6 +59,17 @@ function ProductPagePromoBar() {
         </div>
       ))}
     </div>
+  );
+}
+
+function ProductDemoLegal() {
+  return (
+    <section className="productSheetSection productSheetLegal productDemoLegal" aria-label="Aviso demo">
+      <p className="productDemoLegalTitle">Producto de demostración</p>
+      {DEMO_NOTICE_LINES.map((line) => (
+        <p key={line}>{line}</p>
+      ))}
+    </section>
   );
 }
 
@@ -266,10 +286,15 @@ function ProductSheetLegal() {
 
 export default function ProductPage() {
   const { slug } = useParams();
-  const product = getProduct(slug);
-  const related = listRelatedProducts(slug);
+  const product = useMemo(() => getProductSync(slug), [slug]);
+  const related = useMemo(
+    () => (product ? listRelatedProductsSync(slug) : []),
+    [product, slug],
+  );
   const { wizardProduct, wizardContext, openWizard, closeWizard } = useWizardLauncher();
   const seo = useMemo(() => getProductSeo(product), [product]);
+  const showWizardBlocks = Boolean(product?.supportsWizard);
+  const isDemo = Boolean(product?.isTestProduct);
 
   usePageSeo(seo);
 
@@ -292,17 +317,22 @@ export default function ProductPage() {
     <main className="landing landingProduct">
       <SiteHeader />
       <ProductHero product={product} onOpenWizard={openWizard} />
-      <ProductPagePromoBar />
+      {showWizardBlocks && <ProductPagePromoBar />}
       <ProductSheetIncludes product={product} />
       <ProductSheetSpecs product={product} />
-      <ProductSheetInsurance product={product} />
-      <ProductSheetDelivery />
-      <ProductSheetPreFaqCta product={product} onOpenWizard={openWizard} />
+      {showWizardBlocks && <ProductSheetInsurance product={product} />}
+      {showWizardBlocks && <ProductSheetDelivery />}
+      {showWizardBlocks && (
+        <ProductSheetPreFaqCta product={product} onOpenWizard={openWizard} />
+      )}
       <ProductSheetFaqs product={product} />
-      <ProductSheetLegal />
-      <HowItWorksSection compact />
+      {isDemo && <ProductDemoLegal />}
+      {showWizardBlocks && <ProductSheetLegal />}
+      {showWizardBlocks && <HowItWorksSection compact />}
       <RelatedProducts products={related} onOpenWizard={openWizard} />
-      <ProductFinalCta product={product} onOpenWizard={openWizard} />
+      {showWizardBlocks && (
+        <ProductFinalCta product={product} onOpenWizard={openWizard} />
+      )}
       <SiteFooter />
 
       {wizardProduct && (
