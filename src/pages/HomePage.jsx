@@ -74,8 +74,8 @@ export default function HomePage() {
             src="/hero-desktop.png"
             alt={HERO_ALT}
             className="nbHeroImg"
-            width={1672}
-            height={941}
+            width={2172}
+            height={724}
             decoding="async"
             fetchPriority="high"
           />
