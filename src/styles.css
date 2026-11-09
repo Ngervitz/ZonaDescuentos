@@ -3689,44 +3689,63 @@ img {
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #0f172a;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  max-height: 380px;
+  line-height: 0;
 }
 
 .nbHeroPicture {
   display: block;
   width: 100%;
-  max-width: 100%;
-  max-height: 380px;
-  margin: 0 auto;
+  margin: 0;
   line-height: 0;
 }
 
 .nbHeroImg {
   display: block;
   width: 100%;
-  height: auto;
-  max-width: 100%;
-  max-height: 380px;
-  object-fit: contain;
-  object-position: center top;
+}
+
+@media (min-width: 768px) {
+  .nbHeroBanner {
+    height: clamp(400px, 28vw, 450px);
+    overflow: hidden;
+    background: #0b1a30;
+  }
+
+  .nbHeroPicture {
+    height: 100%;
+  }
+
+  .nbHeroImg {
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 
 @media (max-width: 767px) {
-  .nbHeroBanner,
-  .nbHeroPicture,
-  .nbHeroImg {
+  .nbHeroBanner {
+    display: flex;
+    justify-content: center;
     max-height: 330px;
+    background: #0b1a30;
+  }
+
+  .nbHeroPicture {
+    max-height: 330px;
+  }
+
+  .nbHeroImg {
+    height: auto;
+    max-height: 330px;
+    object-fit: contain;
+    object-position: center top;
   }
 }
 
 .nbOffers {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 0.5rem 1rem 2.5rem;
+  padding: 0.25rem 1rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
