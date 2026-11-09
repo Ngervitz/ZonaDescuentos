@@ -13,28 +13,35 @@ const HERO_ALT =
   "3 notebooks. 3 ofertas imperdibles. Precios especiales en unidades seleccionadas.";
 
 function NotebookOfferBlock({ product, offerIndex }) {
+  const title =
+    product.displayName?.trim() || `${product.brand} ${product.model}`.trim();
+
   return (
     <article className="nbOffer" id={`oferta-${offerIndex}`}>
       <div className="nbOfferMedia">
         <ProductImage
           src={product.mainImage}
           product={product}
-          alt={`${product.brand} ${product.model}`}
+          alt={title}
           className="nbOfferImage"
           eager={offerIndex === 1}
         />
       </div>
       <div className="nbOfferBody">
         <p className="nbOfferKicker">Oferta {offerIndex}</p>
-        <h2 className="nbOfferTitle">
-          {product.brand} {product.model}
-        </h2>
+        <h2 className="nbOfferTitle">{title}</h2>
+        {product.shortDescription ? (
+          <p className="nbOfferLead">{product.shortDescription}</p>
+        ) : null}
         <p className="nbOfferCondition">
           Condición: <strong>{formatConditionLabel(product.condition)}</strong>
         </p>
-        <ul className="nbOfferSpecs">
+        <ul className="nbOfferSpecs" aria-label="Especificaciones">
           {product.specs.map((spec) => (
-            <li key={`${spec.label}-${spec.value}`}>
+            <li
+              key={`${spec.label}-${spec.value}`}
+              className={spec.wide ? "nbOfferSpecWide" : undefined}
+            >
               <span>{spec.label}</span>
               <strong>{spec.value}</strong>
             </li>
@@ -43,12 +50,14 @@ function NotebookOfferBlock({ product, offerIndex }) {
         <p className="nbOfferAvailability">
           Disponibilidad: {formatStockAvailability(product.stockQuantity)}
         </p>
-        <div className="nbOfferPriceBlock">
-          <p className="nbOfferPriceLabel">Precio ilustrativo</p>
-          <p className="nbOfferPrice">{formatUsdPrice(product.priceUsd)}</p>
+        <div className="nbOfferBuyBlock">
+          <div className="nbOfferPriceBlock">
+            <p className="nbOfferPriceLabel">Precio ilustrativo</p>
+            <p className="nbOfferPrice">{formatUsdPrice(product.priceUsd)}</p>
+          </div>
+          <p className="nbOfferDemoTag">Producto de demostración</p>
+          <DirectBuyButton productId={product.id} />
         </div>
-        <p className="nbOfferDemoTag">Producto de demostración</p>
-        <DirectBuyButton productId={product.id} />
       </div>
     </article>
   );

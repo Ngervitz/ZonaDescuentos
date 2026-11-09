@@ -3787,6 +3787,22 @@ img {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
+  min-height: 0;
+}
+
+.nbOfferLead {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.nbOfferBuyBlock {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.35rem;
 }
 
 .nbOfferKicker {
@@ -3814,20 +3830,43 @@ img {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 0.35rem;
+  gap: 0.2rem;
+}
+
+@media (min-width: 900px) {
+  .nbOfferSpecs {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.25rem;
+  }
+
+  .nbOfferSpecs .nbOfferSpecWide {
+    grid-column: 1 / -1;
+  }
 }
 
 .nbOfferSpecs li {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  font-size: 0.9rem;
-  padding: 0.35rem 0;
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 38%) 1fr;
+  gap: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  padding: 0.4rem 0;
   border-bottom: 1px solid #f1f5f9;
+  align-items: baseline;
+}
+
+.nbOfferSpecs .nbOfferSpecWide {
+  grid-template-columns: minmax(7.5rem, 28%) 1fr;
 }
 
 .nbOfferSpecs span {
   color: #64748b;
+  font-weight: 500;
+}
+
+.nbOfferSpecs strong {
+  font-weight: 600;
+  color: #0f172a;
 }
 
 .nbOfferAvailability {
@@ -3837,8 +3876,8 @@ img {
 }
 
 .nbOfferPriceBlock {
-  margin-top: 0.35rem;
-  padding: 0.75rem 0 0;
+  margin-top: 0;
+  padding: 0.85rem 0 0;
   border-top: 2px solid #0f172a;
 }
 
