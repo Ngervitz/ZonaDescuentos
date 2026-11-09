@@ -1,7 +1,8 @@
 export const SITE_SEO = {
-  title: "Zona Descuentos — Tienda",
+  title: "3 notebooks en oferta | Zona Descuentos",
   description:
-    "Catálogo y carrito demostrativo de Zona Descuentos. Precios ilustrativos; compras próximamente.",
+    "Landing comercial demostrativa: Gateway, Lenovo ThinkPad y HP Pro x360. Precios ilustrativos en USD.",
+  noindex: true,
 };
 
 export const NOT_FOUND_SEO = {

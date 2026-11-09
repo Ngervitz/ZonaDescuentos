@@ -3668,6 +3668,202 @@ img {
   line-height: 1.4;
 }
 
+/* ECOM-13 — landing 3 notebooks */
+.nbLanding {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 18%, #f5f5f7 18%);
+}
+
+.nbHeader {
+  background: rgba(15, 23, 42, 0.92);
+  color: #fff;
+  border-bottom: none;
+}
+
+.nbHeader .brandLogoTitle,
+.nbHeader .brandLogoZona,
+.nbHeader .brandLogoDesc {
+  color: #fff;
+}
+
+.nbHero {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 1.75rem;
+  color: #f8fafc;
+  text-align: center;
+}
+
+.nbHeroBrand {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+  margin: 0 0 0.75rem;
+}
+
+.nbHeroTitle {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.5rem, 5vw, 2.35rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.nbHeroSubtitle {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: #cbd5e1;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nbOffers {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.nbOffer {
+  display: grid;
+  gap: 1.25rem;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+}
+
+@media (min-width: 768px) {
+  .nbOffer {
+    grid-template-columns: minmax(280px, 42%) 1fr;
+    align-items: stretch;
+  }
+}
+
+.nbOfferMedia {
+  background: #f1f5f9;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nbOfferImage,
+.nbOfferMedia .productImageFallback {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: contain;
+}
+
+.nbOfferBody {
+  padding: 1.25rem 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.nbOfferKicker {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cabal, #009fe3);
+}
+
+.nbOfferTitle {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.nbOfferCondition {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.nbOfferSpecs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.nbOfferSpecs li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.nbOfferSpecs span {
+  color: #64748b;
+}
+
+.nbOfferAvailability {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.nbOfferPriceBlock {
+  margin-top: 0.35rem;
+  padding: 0.75rem 0 0;
+  border-top: 2px solid #0f172a;
+}
+
+.nbOfferPriceLabel {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.nbOfferPrice {
+  margin: 0.15rem 0 0;
+  font-size: clamp(1.75rem, 6vw, 2.25rem);
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.nbOfferDemoTag {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #b45309;
+  font-weight: 600;
+}
+
+.directBuyBtn:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nbFooter {
+  margin-top: 0;
+}
+
 @media (max-width: 360px) {
   .catalogGrid {
     grid-template-columns: 1fr;
@@ -3683,5 +3879,17 @@ img {
   .storeNav {
     flex-wrap: wrap;
     gap: 0.35rem;
+  }
+
+  .nbHero {
+    padding: 1.5rem 1rem 1.25rem;
+  }
+
+  .nbOfferBody {
+    padding: 1rem;
+  }
+
+  .nbOfferPrice {
+    font-size: 1.85rem;
   }
 }

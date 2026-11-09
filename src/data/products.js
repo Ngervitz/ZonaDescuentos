@@ -21,6 +21,11 @@ export function normalizeProduct(product) {
   const totalPrice = Number(product.totalPrice) || priceMonthly * installments;
   const directPriceGross =
     product.directPriceGross != null ? Number(product.directPriceGross) : null;
+  const priceUsd = product.priceUsd != null ? Number(product.priceUsd) : null;
+  const stockQuantity =
+    product.stockQuantity === null || product.stockQuantity === undefined
+      ? null
+      : Number(product.stockQuantity);
   const mainImage = product.mainImage || product.image || null;
   const rawGallery = Array.isArray(product.gallery) ? product.gallery.filter(Boolean) : [];
   const gallery = rawGallery.length > 0 ? rawGallery : mainImage ? [mainImage] : [];
@@ -31,6 +36,11 @@ export function normalizeProduct(product) {
     supportsWizard: purchaseModes.includes("wizard"),
     supportsDirect: purchaseModes.includes("direct"),
     directPriceGross,
+    priceUsd,
+    stockQuantity,
+    condition: product.condition ?? null,
+    brand: product.brand ?? "",
+    model: product.model ?? product.name,
     isTestProduct: product.isTestProduct === true,
     mainImage,
     gallery,
@@ -75,4 +85,23 @@ export function normalizeProduct(product) {
 
 export function formatProductPrice(amount) {
   return formatPrice(amount);
+}
+
+export function formatUsdPrice(amount) {
+  if (amount == null || Number.isNaN(Number(amount))) return "—";
+  return `USD ${Number(amount).toLocaleString("en-US")}`;
+}
+
+export function formatStockAvailability(stockQuantity) {
+  if (stockQuantity == null || Number.isNaN(stockQuantity)) {
+    return "Stock por confirmar";
+  }
+  if (stockQuantity <= 0) return "Sin stock confirmado";
+  return `${stockQuantity} unidad${stockQuantity === 1 ? "" : "es"}`;
+}
+
+export function formatConditionLabel(condition) {
+  if (condition === "nueva") return "Nueva";
+  if (condition === "recertificada") return "Recertificada";
+  return condition ?? "—";
 }

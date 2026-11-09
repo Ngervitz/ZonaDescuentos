@@ -16,9 +16,9 @@ globalThis.localStorage = {
   },
 };
 
-const raw = catalogProducts.find((p) => p.slug === "demo-iphone-15");
+const raw = catalogProducts.find((p) => p.slug === "gateway-ryzen5-8-256");
 if (!raw) {
-  console.error("FAIL: demo-iphone-15 not in catalog");
+  console.error("FAIL: gateway-ryzen5-8-256 not in catalog");
   process.exit(1);
 }
 

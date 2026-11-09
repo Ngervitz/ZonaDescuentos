@@ -7,3 +7,6 @@ export const directPurchaseEnabled =
 
 /** Wizard Cabal: conservado en código, deshabilitado hasta autorización explícita. */
 export const wizardIntegrationEnabled = import.meta.env.VITE_ENABLE_WIZARD === "true";
+
+/** Carrito en navegación / flujo principal (ECOM-13: compra directa Handy). */
+export const cartNavEnabled = import.meta.env.VITE_ENABLE_CART_NAV === "true";
