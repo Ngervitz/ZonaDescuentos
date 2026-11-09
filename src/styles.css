@@ -3670,7 +3670,7 @@ img {
 
 /* ECOM-13 — landing 3 notebooks */
 .nbLanding {
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 18%, #f5f5f7 18%);
+  background: #f5f5f7;
 }
 
 .nbHeader {
@@ -3685,44 +3685,33 @@ img {
   color: #fff;
 }
 
-.nbHero {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 1.75rem;
-  color: #f8fafc;
-  text-align: center;
-}
-
-.nbHeroBrand {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  opacity: 0.85;
-  margin: 0 0 0.75rem;
-}
-
-.nbHeroTitle {
-  margin: 0 0 0.75rem;
-  font-size: clamp(1.5rem, 5vw, 2.35rem);
-  line-height: 1.15;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.nbHeroSubtitle {
+.nbHeroBanner {
+  width: 100%;
   margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.45;
-  color: #cbd5e1;
-  max-width: 36rem;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0;
+  background: #0f172a;
+}
+
+.nbHeroPicture {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.nbHeroImg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center top;
 }
 
 .nbOffers {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 0 1rem 2.5rem;
+  padding: 1.25rem 1rem 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -3881,8 +3870,8 @@ img {
     gap: 0.35rem;
   }
 
-  .nbHero {
-    padding: 1.5rem 1rem 1.25rem;
+  .nbOffers {
+    padding-top: 1rem;
   }
 
   .nbOfferBody {

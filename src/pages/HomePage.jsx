@@ -9,9 +9,8 @@ import {
 } from "../data/products";
 import { getProductsSync } from "../services/productCatalog";
 
-const HERO_TITLE = "3 NOTEBOOKS. 3 OFERTAS IMPERDIBLES.";
-const HERO_SUBTITLE =
-  "Precios especiales en unidades seleccionadas. Elegí la tuya antes de que se agoten.";
+const HERO_ALT =
+  "3 notebooks. 3 ofertas imperdibles. Precios especiales en unidades seleccionadas.";
 
 function NotebookOfferBlock({ product, offerIndex }) {
   return (
@@ -68,10 +67,19 @@ export default function HomePage() {
   return (
     <main className="landing nbLanding">
       <SiteHeader />
-      <header className="nbHero">
-        <p className="nbHeroBrand">Zona Descuentos</p>
-        <h1 className="nbHeroTitle">{HERO_TITLE}</h1>
-        <p className="nbHeroSubtitle">{HERO_SUBTITLE}</p>
+      <header className="nbHeroBanner">
+        <picture className="nbHeroPicture">
+          <source media="(max-width: 767px)" srcSet="/hero-mobile.png" />
+          <img
+            src="/hero-desktop.png"
+            alt={HERO_ALT}
+            className="nbHeroImg"
+            width={1672}
+            height={941}
+            decoding="async"
+            fetchPriority="high"
+          />
+        </picture>
       </header>
 
       <section className="nbOffers" aria-label="Ofertas de notebooks">
