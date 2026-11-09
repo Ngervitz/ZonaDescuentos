@@ -3741,68 +3741,75 @@ img {
 }
 
 .nbOffers {
-  max-width: 1024px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0.25rem 1rem 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  padding: 0.25rem 1rem 2rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .nbOffers {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+    align-items: start;
+  }
 }
 
 .nbOffer {
-  display: grid;
-  gap: 1.25rem;
+  display: flex;
+  flex-direction: column;
   background: #fff;
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
-}
-
-@media (min-width: 768px) {
-  .nbOffer {
-    grid-template-columns: minmax(280px, 42%) 1fr;
-    align-items: stretch;
-  }
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.07);
 }
 
 .nbOfferMedia {
   background: #f1f5f9;
-  min-height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.65rem 0.75rem;
+  min-height: 0;
+  max-height: clamp(140px, 28vw, 200px);
 }
 
 .nbOfferImage,
 .nbOfferMedia .productImageFallback {
-  width: 100%;
-  height: 100%;
-  min-height: 220px;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: clamp(120px, 26vw, 180px);
   object-fit: contain;
 }
 
 .nbOfferBody {
-  padding: 1.25rem 1.25rem 1.5rem;
+  padding: 0.85rem 1rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.5rem;
   min-height: 0;
 }
 
 .nbOfferLead {
   margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: 0.82rem;
+  line-height: 1.45;
   color: #475569;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .nbOfferBuyBlock {
-  margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding-top: 0.35rem;
+  gap: 0.4rem;
+  padding-top: 0.15rem;
 }
 
 .nbOfferKicker {
@@ -3816,13 +3823,8 @@ img {
 
 .nbOfferTitle {
   margin: 0;
-  font-size: 1.35rem;
-  line-height: 1.25;
-}
-
-.nbOfferCondition {
-  margin: 0;
-  font-size: 0.95rem;
+  font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+  line-height: 1.3;
 }
 
 .nbOfferSpecs {
@@ -3830,33 +3832,63 @@ img {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 0.2rem;
+  gap: 0;
 }
 
-@media (min-width: 900px) {
-  .nbOfferSpecs {
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1.25rem;
-  }
+.nbOfferSpecsPrimary {
+  margin-top: 0.1rem;
+}
 
-  .nbOfferSpecs .nbOfferSpecWide {
-    grid-column: 1 / -1;
-  }
+.nbOfferSpecsFull .nbOfferSpecWide {
+  grid-template-columns: minmax(6.5rem, 32%) 1fr;
 }
 
 .nbOfferSpecs li {
   display: grid;
-  grid-template-columns: minmax(7.5rem, 38%) 1fr;
-  gap: 0.5rem 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.4;
-  padding: 0.4rem 0;
+  grid-template-columns: minmax(6.25rem, 42%) 1fr;
+  gap: 0.35rem 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  padding: 0.3rem 0;
   border-bottom: 1px solid #f1f5f9;
   align-items: baseline;
 }
 
-.nbOfferSpecs .nbOfferSpecWide {
-  grid-template-columns: minmax(7.5rem, 28%) 1fr;
+.nbOfferDetails {
+  margin-top: 0.15rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 0.35rem;
+}
+
+.nbOfferDetailsSummary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--cabal, #009fe3);
+  list-style: none;
+  user-select: none;
+}
+
+.nbOfferDetailsSummary::-webkit-details-marker {
+  display: none;
+}
+
+.nbOfferDetailsSummary::after {
+  content: " ▾";
+  font-weight: 600;
+}
+
+.nbOfferDetails[open] .nbOfferDetailsSummary::after {
+  content: " ▴";
+}
+
+.nbOfferDetailsBody {
+  padding-top: 0.45rem;
+}
+
+.nbOfferDetailsBody .nbOfferAvailability {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
 }
 
 .nbOfferSpecs span {
@@ -3877,7 +3909,7 @@ img {
 
 .nbOfferPriceBlock {
   margin-top: 0;
-  padding: 0.85rem 0 0;
+  padding: 0.55rem 0 0;
   border-top: 2px solid #0f172a;
 }
 
@@ -3890,8 +3922,8 @@ img {
 }
 
 .nbOfferPrice {
-  margin: 0.15rem 0 0;
-  font-size: clamp(1.75rem, 6vw, 2.25rem);
+  margin: 0.1rem 0 0;
+  font-size: clamp(1.45rem, 5vw, 1.85rem);
   font-weight: 800;
   color: #0f172a;
 }

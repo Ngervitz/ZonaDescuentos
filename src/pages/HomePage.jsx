@@ -12,9 +12,49 @@ import { getProductsSync } from "../services/productCatalog";
 const HERO_ALT =
   "3 notebooks. 3 ofertas imperdibles. Precios especiales en unidades seleccionadas.";
 
+const PRIMARY_SPEC_LABELS = [
+  "Procesador",
+  "Memoria RAM",
+  "Almacenamiento",
+  "Pantalla",
+];
+
+function buildOfferSpecGroups(product) {
+  const specs = product.specs ?? [];
+  const primarySpecs = PRIMARY_SPEC_LABELS.map((label) =>
+    specs.find((spec) => spec.label === label)
+  ).filter(Boolean);
+  const conditionSpec = {
+    label: "Condición",
+    value: formatConditionLabel(product.condition),
+  };
+  const fullSpecs = [...specs, conditionSpec];
+
+  return { primarySpecs, fullSpecs };
+}
+
+function OfferSpecList({ specs, className = "", ariaLabel }) {
+  if (!specs.length) return null;
+
+  return (
+    <ul className={`nbOfferSpecs ${className}`.trim()} aria-label={ariaLabel}>
+      {specs.map((spec) => (
+        <li
+          key={`${spec.label}-${spec.value}`}
+          className={spec.wide ? "nbOfferSpecWide" : undefined}
+        >
+          <span>{spec.label}</span>
+          <strong>{spec.value}</strong>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function NotebookOfferBlock({ product, offerIndex }) {
   const title =
     product.displayName?.trim() || `${product.brand} ${product.model}`.trim();
+  const { primarySpecs, fullSpecs } = buildOfferSpecGroups(product);
 
   return (
     <article className="nbOffer" id={`oferta-${offerIndex}`}>
@@ -33,23 +73,11 @@ function NotebookOfferBlock({ product, offerIndex }) {
         {product.shortDescription ? (
           <p className="nbOfferLead">{product.shortDescription}</p>
         ) : null}
-        <p className="nbOfferCondition">
-          Condición: <strong>{formatConditionLabel(product.condition)}</strong>
-        </p>
-        <ul className="nbOfferSpecs" aria-label="Especificaciones">
-          {product.specs.map((spec) => (
-            <li
-              key={`${spec.label}-${spec.value}`}
-              className={spec.wide ? "nbOfferSpecWide" : undefined}
-            >
-              <span>{spec.label}</span>
-              <strong>{spec.value}</strong>
-            </li>
-          ))}
-        </ul>
-        <p className="nbOfferAvailability">
-          Disponibilidad: {formatStockAvailability(product.stockQuantity)}
-        </p>
+        <OfferSpecList
+          specs={primarySpecs}
+          className="nbOfferSpecsPrimary"
+          ariaLabel="Características principales"
+        />
         <div className="nbOfferBuyBlock">
           <div className="nbOfferPriceBlock">
             <p className="nbOfferPriceLabel">Precio ilustrativo</p>
@@ -58,6 +86,21 @@ function NotebookOfferBlock({ product, offerIndex }) {
           <p className="nbOfferDemoTag">Producto de demostración</p>
           <DirectBuyButton productId={product.id} />
         </div>
+        <details className="nbOfferDetails">
+          <summary className="nbOfferDetailsSummary">
+            Ver especificaciones completas
+          </summary>
+          <div className="nbOfferDetailsBody">
+            <OfferSpecList
+              specs={fullSpecs}
+              className="nbOfferSpecsFull"
+              ariaLabel="Especificaciones completas"
+            />
+            <p className="nbOfferAvailability">
+              Disponibilidad: {formatStockAvailability(product.stockQuantity)}
+            </p>
+          </div>
+        </details>
       </div>
     </article>
   );
