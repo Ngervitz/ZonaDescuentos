@@ -3753,13 +3753,14 @@ img {
   .nbOffers {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.85rem;
-    align-items: start;
+    align-items: stretch;
   }
 }
 
 .nbOffer {
   display: flex;
   flex-direction: column;
+  height: 100%;
   background: #fff;
   border-radius: 14px;
   overflow: hidden;
@@ -3792,6 +3793,31 @@ img {
   flex-direction: column;
   gap: 0.5rem;
   min-height: 0;
+  flex: 1 1 auto;
+}
+
+.nbOfferIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 0;
+}
+
+.nbOfferCommerce {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 900px) {
+  .nbOfferIntro {
+    flex: 1 1 auto;
+  }
+
+  .nbOfferCommerce {
+    flex: 0 0 auto;
+    margin-top: auto;
+  }
 }
 
 .nbOfferLead {
@@ -3809,7 +3835,11 @@ img {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  padding-top: 0.15rem;
+  width: 100%;
+}
+
+.nbOfferCommerce .directBuyBtn {
+  width: 100%;
 }
 
 .nbOfferKicker {
@@ -3855,9 +3885,9 @@ img {
 }
 
 .nbOfferDetails {
-  margin-top: 0.15rem;
-  border-top: 1px solid #e2e8f0;
-  padding-top: 0.35rem;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .nbOfferDetailsSummary {

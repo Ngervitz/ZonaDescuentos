@@ -68,39 +68,43 @@ function NotebookOfferBlock({ product, offerIndex }) {
         />
       </div>
       <div className="nbOfferBody">
-        <p className="nbOfferKicker">Oferta {offerIndex}</p>
-        <h2 className="nbOfferTitle">{title}</h2>
-        {product.shortDescription ? (
-          <p className="nbOfferLead">{product.shortDescription}</p>
-        ) : null}
-        <OfferSpecList
-          specs={primarySpecs}
-          className="nbOfferSpecsPrimary"
-          ariaLabel="Características principales"
-        />
-        <div className="nbOfferBuyBlock">
-          <div className="nbOfferPriceBlock">
-            <p className="nbOfferPriceLabel">Precio ilustrativo</p>
-            <p className="nbOfferPrice">{formatUsdPrice(product.priceUsd)}</p>
-          </div>
-          <p className="nbOfferDemoTag">Producto de demostración</p>
-          <DirectBuyButton productId={product.id} />
+        <div className="nbOfferIntro">
+          <p className="nbOfferKicker">Oferta {offerIndex}</p>
+          <h2 className="nbOfferTitle">{title}</h2>
+          {product.shortDescription ? (
+            <p className="nbOfferLead">{product.shortDescription}</p>
+          ) : null}
+          <OfferSpecList
+            specs={primarySpecs}
+            className="nbOfferSpecsPrimary"
+            ariaLabel="Características principales"
+          />
         </div>
-        <details className="nbOfferDetails">
-          <summary className="nbOfferDetailsSummary">
-            Ver especificaciones completas
-          </summary>
-          <div className="nbOfferDetailsBody">
-            <OfferSpecList
-              specs={fullSpecs}
-              className="nbOfferSpecsFull"
-              ariaLabel="Especificaciones completas"
-            />
-            <p className="nbOfferAvailability">
-              Disponibilidad: {formatStockAvailability(product.stockQuantity)}
-            </p>
+        <div className="nbOfferCommerce">
+          <div className="nbOfferBuyBlock">
+            <div className="nbOfferPriceBlock">
+              <p className="nbOfferPriceLabel">Precio ilustrativo</p>
+              <p className="nbOfferPrice">{formatUsdPrice(product.priceUsd)}</p>
+            </div>
+            <p className="nbOfferDemoTag">Producto de demostración</p>
+            <DirectBuyButton productId={product.id} />
           </div>
-        </details>
+          <details className="nbOfferDetails">
+            <summary className="nbOfferDetailsSummary">
+              Ver especificaciones completas
+            </summary>
+            <div className="nbOfferDetailsBody">
+              <OfferSpecList
+                specs={fullSpecs}
+                className="nbOfferSpecsFull"
+                ariaLabel="Especificaciones completas"
+              />
+              <p className="nbOfferAvailability">
+                Disponibilidad: {formatStockAvailability(product.stockQuantity)}
+              </p>
+            </div>
+          </details>
+        </div>
       </div>
     </article>
   );
